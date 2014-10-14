@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('tigerwitApp')
-.directive('wdPlaceHolder', function() {
+angular.module('atomApp')
+.directive('wdPlaceholder', function() {
 return {
     restrict: 'A',
     require: 'ngModel',
     link: function(scope, element, attr, ctrl) {
-        var holder = attr.placeholder;
+        var holder = attr.wdPlaceholder;
         // 标记一下是否是第一次进入
         var firstFlag = false;
         var placehold = function () {
