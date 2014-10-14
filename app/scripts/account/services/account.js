@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tigerwitApp')
+angular.module('atomApp')
 .factory('wdAccount', 
 ['$rootScope', '$http', 'wdStorage',
 function($rootScope, $http, wdStorage) {

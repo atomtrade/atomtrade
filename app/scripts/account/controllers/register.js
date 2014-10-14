@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tigerwitApp')
+angular.module('atomApp')
 .controller('registerCtrl', 
 ['$scope', 'wdAccount', '$timeout', 'wdConfig', 'wdStorage', '$location',
 function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location) {

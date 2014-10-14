@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tigerwitApp')
+angular.module('atomApp')
 .factory('wdConfig', 
 ['$rootScope', '$location', 
 function($rootScope, $location) {

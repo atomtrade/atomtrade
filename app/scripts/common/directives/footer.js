@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('atomApp')
-.directive('wdHeightEqualWidth', function() {
+.directive('wdFooter', function() {
 return {
     restrict: 'A',
+    templateUrl: 'views/common/footer.html',
+    replace: true,
     scope: true,
     link: function(scope, element, attributes) {
-        var h = element.height();
-        element.width(h);
+        
     }
 };
 });

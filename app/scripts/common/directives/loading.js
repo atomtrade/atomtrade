@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tigerwitApp')
+angular.module('atomApp')
 .directive('wdLoading', function() {
 return {
     restrict: 'A',

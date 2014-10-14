@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name tigerwitApp
+ * @name atomApp
  * @description
- * # tigerwitApp
+ * # atomApp
  *
  * Main module of the application.
  */
 angular
-.module('tigerwitApp', 
+.module('atomApp', 
 ['ngCookies', 'ngResource', 'ngRoute', 'ngSanitize'])
 .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 $routeProvider

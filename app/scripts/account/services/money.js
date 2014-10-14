@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tigerwitApp')
+angular.module('atomApp')
 .factory('wdAccountMoney', 
 ['$window', '$location', 'wdConfig', '$http',
 function($window, $location, wdConfig, $http) {

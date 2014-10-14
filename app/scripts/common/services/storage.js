@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tigerwitApp')
+angular.module('atomApp')
 .factory('wdStorage', ['$window', function($window) {
     function get(name) {
         return $window.localStorage.getItem(name);

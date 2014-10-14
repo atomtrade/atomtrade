@@ -1,0 +1,24 @@
+.wd-footer {
+    min-width: $min-page-width;
+    position: fixed;
+    bottom: 0px;
+    z-index: $top-index;
+    height: 50px;
+    line-height: 50px;
+    background-color: $standard-black;
+    width: 100%;
+    color: $standard-white;
+    a {
+        color: $standard-white;
+        font-size: 13px;
+        margin: 0px 5px;
+    }
+    .service {
+        float: right;
+        margin-right: 30px;
+    }
+    .nav {
+        margin-left: 30px;
+        float: left;
+    }
+}

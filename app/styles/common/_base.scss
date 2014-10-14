@@ -1,10 +1,10 @@
 /* 基础色 */
 $standard-black: #1f1f23;
 $standard-white: #ffffff;
-$standard-blue: #5c92fb;
+$standard-blue: #0380ff;
 $standard-blue-green: #74aac5;
 $standard-green: #22c064;
-$standard-gray: #f7f7f7;
+$standard-gray: #eee;
 $standard-deep-gray: #aaa;
 $standard-red: #ed7161;
 $standard-orange: #faaf46;
@@ -25,7 +25,7 @@ body {
     right: 0px;
     left: 0px;
     bottom: 0px;
-    font-family: 'Helvetica Neue',Helvetica,Arial,'Hiragino Sans GB','WenQuanYi Micro Hei','Microsoft YaHei',sans-serif;
+    font-family: 'Hiragino Sans GB','WenQuanYi Micro Hei','Microsoft YaHei','Helvetica Neue',Helvetica,Arial,sans-serif;
     .wd-view {
         min-height: 100%;
     }
@@ -45,12 +45,11 @@ a {
 
 p {
     font-size: 15px;
-    display: inline-block;
 }
 
 input[type=text], input[type=password] {
+    display: inline-block;
     padding: 8px 10px;
-    border-radius: 5px;
     border: 1px solid $standard-deep-gray;
     font-size: 15px;
     color: $standard-black;
@@ -74,15 +73,15 @@ ul {
 
 .btn {
     display: inline-block;
-    background-color: $standard-blue-green;
+    background-color: $standard-blue;
     color: $standard-white;
     padding: 8px 14px;
-    border-radius: 3px;
     cursor: pointer;
     line-height: 20px;
     font-size: 14px;
     height: 20px;
     text-align: center;
+    vertical-align: top;
     @include transition(opacity, 0.4s);
     &:hover {
         @include opacity(0.8);
