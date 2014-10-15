@@ -1,8 +1,28 @@
 .wd-header {
-    padding: 30px 0px 20px 0px;
     height: 40px;
+    line-height: 40px;
+    padding-top: 25px;
+    padding-bottom: 24px;
+    background-color: $standard-black;
     .logo {
+        @include wd-image("logo.png");
+        display: inline-block;
         float: left;
-        margin-left: 40px;
+        margin-left: 30px;
+    }
+    .nav {
+        display: inline-block;
+        float: right;
+        margin-right: 30px;
+        a {
+            color: $standard-white;
+            margin: 0px 5px;
+        }
+        .login-btn {
+            background-color: transparent;
+            border: 1px solid $standard-white;
+            width: 50px;
+            margin-left: 20px;
+        }
     }
 }

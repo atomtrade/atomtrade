@@ -1,0 +1,89 @@
+.wd-register-box {
+    background-color: $standard-gray;
+    width: 100%;
+    height: 100%;
+    min-width: $min-page-width;
+    position: absolute;
+    top: 89px;
+    padding-top: 60px;
+    .header {
+        width: 70%;
+        margin: 0px auto 20px auto;
+        .title {
+            font-size: 30px;
+        }
+        .des {
+            font-size: 13px;
+            margin-left: 15px;
+        }
+    }
+    .body {
+        width: 70%;
+        margin: 0px auto;
+        padding: 40px 0px;
+        background-color: $standard-white;
+        border: 1px solid $standard-deep-gray;
+        .body-content {
+            margin: 0px auto;
+            width: 600px;
+        }
+        .btns {
+            margin-top: 30px;
+            margin-left: 106px;
+            .btn {
+                width: 80px;
+            }
+            .prev-btn {
+                display: inline-block;
+                margin-top: 8px;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+.wd-register {
+    min-height: 920px;
+    .body {
+        .item {
+            height: 36px;
+            width: 600px;
+            margin: 23px auto;
+            line-height: 36px;
+            .title {
+                display: inline-block;
+                width: 100px;
+                font-size: 16px;
+            }
+            .tip {
+                display: inline-block;
+                background-color: $standard-orange;
+                font-size: 10px;
+                vertical-align: top;
+                width: 220px;
+                border: 1px solid $standard-deep-orange;
+                padding: 0px 5px;
+            }
+            input[type=text] {
+                width: 200px;
+                margin-right: 20px;
+            }
+            select {
+                width: 222px;
+                margin-right: 20px;
+            }
+            .address-radio {
+                margin-right: 5px;
+                &.second {
+                    margin-left: 30px;
+                }
+            }
+        }
+        .tips {
+            margin-left: 106px;
+            margin-top: 5px;
+            p, a {
+                font-size: 12px;
+            }
+        }
+    }
+}

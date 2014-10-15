@@ -17,17 +17,25 @@ $routeProvider
         templateUrl: 'views/account/index.html',
         controller: 'registerCtrl'
     })
-    .when('/login', {
-        templateUrl: 'views/account/login.html',
-        controller: 'loginCtrl'
-    })
     .when('/register', {
         templateUrl: 'views/account/register.html',
         controller: 'registerCtrl'
     })
-    .when('/money', {
-        templateUrl: 'views/account/money.html',
-        controller: 'moneyCtrl'        
+    .when('/trade-range', {
+        templateUrl: 'views/account/trade-range.html',
+        controller: 'registerCtrl'
+    })
+    .when('/experience', {
+        templateUrl: 'views/account/experience.html',
+        controller: 'registerCtrl'
+    })
+    .when('/check-info', {
+        templateUrl: 'views/account/check-info.html',
+        controller: 'registerCtrl'
+    })
+    .when('/finish-register', {
+        templateUrl: 'views/account/finish-register.html',
+        controller: 'registerCtrl'
     })
     .otherwise({
         redirectTo: '/index'

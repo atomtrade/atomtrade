@@ -7,8 +7,14 @@
 @import "common/background-image";
 @import "common/loading";
 @import "common/place-holder";
+@import "common/header";
 @import "common/footer";
 @import "../base/webuploader-0.1.5/webuploader";
 
 /* account */
 @import "account/index";
+@import "account/register";
+@import "account/trade-range";
+@import "account/experience";
+@import "account/check-info";
+@import "account/finish-register";
