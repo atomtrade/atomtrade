@@ -1,24 +1,44 @@
 .wd-footer {
+    position: relative;
+    margin: 0 auto;
+    width: $page-width;
     min-width: $min-page-width;
-    position: fixed;
-    bottom: 0px;
-    z-index: $top-index;
-    height: 50px;
-    line-height: 50px;
+    height: 270px;
     background-color: $standard-black;
-    width: 100%;
     color: $standard-white;
-    a {
-        color: $standard-white;
-        font-size: 13px;
-        margin: 0px 5px;
+    p, a {
+        color: #7E8BA0;
+        &.title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: $standard-white;
+        }
     }
-    .service {
-        float: right;
-        margin-right: 30px;
+    .block {
+        width: 150px;
+        p, a {
+            display: block;
+            width: 100%;
+        }
     }
-    .nav {
-        margin-left: 30px;
-        float: left;
+    .left {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        .block {
+            float: left;
+        }
+    }
+    .right {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        text-align: center;
+    }
+    .bottom-tips {
+        border-top: 1px solid #333;
+        position: absolute;
+        bottom: 0px;
+        padding: 15px 20px 10px 20px;
     }
 }

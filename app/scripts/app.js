@@ -17,23 +17,27 @@ $routeProvider
         templateUrl: 'views/account/index.html',
         controller: 'registerCtrl'
     })
-    .when('/register', {
+    .when('/account-register', {
         templateUrl: 'views/account/register.html',
         controller: 'registerCtrl'
     })
-    .when('/trade-range', {
+    .when('/account-trade-range', {
         templateUrl: 'views/account/trade-range.html',
         controller: 'registerCtrl'
     })
-    .when('/experience', {
+    .when('/account-experience', {
         templateUrl: 'views/account/experience.html',
         controller: 'registerCtrl'
     })
-    .when('/check-info', {
+    .when('/account-risk', {
+        templateUrl: 'views/account/risk.html',
+        controller: 'registerCtrl'
+    })
+    .when('/account-check-info', {
         templateUrl: 'views/account/check-info.html',
         controller: 'registerCtrl'
     })
-    .when('/finish-register', {
+    .when('/account-finish', {
         templateUrl: 'views/account/finish-register.html',
         controller: 'registerCtrl'
     })

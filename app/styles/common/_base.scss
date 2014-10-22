@@ -1,16 +1,19 @@
 /* 基础色 */
-$standard-black: #1f1f23;
+$standard-black: #000000;
+$standard-light-black: #393B3F;
 $standard-white: #ffffff;
-$standard-blue: #0380ff;
-$standard-blue-green: #74aac5;
-$standard-green: #22c064;
-$standard-gray: #eee;
+$standard-blue: #0A5ECC;
+$standard-light-blue: #E0F7FF;
+$standard-deep-blue: #1C5095;
+$standard-orange: #FE7325;
+$standard-gray: #ebebeb;
 $standard-deep-gray: #aaa;
 $standard-red: #ed7161;
-$standard-orange: #f6e2bf;
 $standard-deep-orange: #faaf46;
+$standard-blue-green: #74aac5;
+$standard-green: #22c064;
 
-
+$page-width: 80%;
 $min-page-width: 960px; 
 
 /* z-index */
@@ -34,10 +37,11 @@ body {
 }
 
 a {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 20px;
     text-decoration: none;
     color: $standard-blue;
+    cursor: pointer;
     &:hover {
         text-decoration: underline;
     }
@@ -47,7 +51,7 @@ a {
 }
 
 p {
-    font-size: 15px;
+    font-size: 13px;
 }
 
 input[type=text], input[type=password] {

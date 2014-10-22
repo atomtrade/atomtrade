@@ -1,28 +1,64 @@
 .wd-header {
-    height: 40px;
-    line-height: 40px;
-    padding-top: 25px;
-    padding-bottom: 24px;
-    background-color: $standard-black;
-    .logo {
-        @include wd-image("logo.png");
-        display: inline-block;
-        float: left;
-        margin-left: 30px;
+    min-width: $min-page-width;
+    margin: 0 auto;
+    width: $page-width;
+    .top-tips {
+        height: 36px;
+        line-height: 36px;
+        background-color: $standard-gray;
+        color: #7D8185;
+        a {
+            color: #7D8185;     
+        }
+        a, span {
+            margin: 5px;
+        }
+        padding: 0px 35px;
+        .left {
+            float: left;
+        }
+        .right {
+            float: right;
+            .open-btn {
+                margin: 0px;
+                background-color: $standard-orange;
+            }
+        }
+    }
+    .body {
+        padding: 10px 35px;
+        .logo {
+            @include wd-image('logo.png');
+        }
     }
     .nav {
-        display: inline-block;
-        float: right;
-        margin-right: 30px;
-        a {
-            color: $standard-white;
-            margin: 0px 5px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0px 35px;
+        background-color: $standard-blue;
+        .btn {
+            width: 78px;
+            height: 24px;
+            line-height: 24px;
+            font-size: 18px;
+            &:hover {
+                background-color: $standard-deep-blue;
+            }
         }
-        .login-btn {
-            background-color: transparent;
-            border: 1px solid $standard-white;
-            width: 50px;
-            margin-left: 20px;
+        .left {
+            display: block;
+            float: left;
+            height: 100%;
+        }
+        .right {
+            background-color: $standard-orange;
+            height: 100%;
+            display: block;
+            float: right;
+            .buy-btn, .my-btn {
+                margin: 0px 20px;
+                background-color: $standard-orange;
+            }
         }
     }
 }
