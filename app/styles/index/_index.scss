@@ -1,0 +1,51 @@
+.wd-index {
+    background-color: $standard-gray;
+    .banner {
+        height: 300px;
+        @include wd-image('index-banner.jpg');
+        width: 100%;
+    }
+    .intro-info {
+        height: 260px;
+        padding: 18px 20px 20px 20px;
+        .block {
+            padding-top: 30px;
+            cursor: pointer;
+            display: inline-block;
+            width: 24%;
+            height: 220px;
+            text-align: center;
+            background-color: $standard-white;
+            @include opacity(0.6);
+            .title {
+                font-size: 20px;
+                line-height: 30px;
+                height: 40px;
+                color: $standard-black;
+            }
+            .icon {
+                display: inline-block;
+            }
+            @include transition(opacity, 0.8s);
+            &:hover {
+                @include opacity(1);
+            }
+            p {
+                line-height: 0px;
+                color: $standard-deep-gray;
+            }
+            .icon-safe {
+                @include wd-image('icon-lock.png');
+            }
+            .icon-quality {
+                @include wd-image('icon-computer.png');
+            }
+            .icon-cheap {
+                @include wd-image('icon-money.png');
+            }
+            .icon-local {
+                @include wd-image('icon-local.png');
+            }
+        }
+    }
+}

@@ -1,0 +1,85 @@
+.wd-download {
+    background-color: $standard-gray;
+    .banner {
+        height: 300px;
+        @include wd-image('index-banner.jpg');
+        width: 100%;
+    }
+    .intro-info {
+        @include transition(all, 0.4s);
+        text-align: center;
+        height: 310px;
+        padding: 18px 20px 20px 20px;
+        .select-title {
+            .item {
+                float: left;
+                width: 50%;
+                text-align: center;
+                border-bottom: 2px solid $standard-deep-gray;
+                margin-bottom: 25px;
+                cursor: pointer;
+                .title {
+                    font-size: 20px;
+                    margin-bottom: 1px;
+                    @include opacity(0.6);
+                }
+                &.active {
+                    border-bottom: 3px solid $standard-blue;
+                    .title {
+                        margin-bottom: 0px;
+                        @include opacity(1);
+                    }
+                }
+            }
+        }
+        .block {
+            padding-top: 30px;
+            cursor: pointer;
+            display: inline-block;
+            width: 24%;
+            height: 206px;
+            text-align: center;
+            background-color: $standard-white;
+            position: relative;
+            @include opacity(0.6);
+            .title {
+                font-size: 20px;
+                line-height: 30px;
+                height: 40px;
+                color: $standard-black;
+            }
+            .icon {
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+            .link {
+                position: absolute;
+                top: 0px;
+                bottom: 0px;
+                left: 0px;
+                right: 0px;
+            }
+            &:hover {
+                @include opacity(1);
+            }
+            .btn {
+                width: 80px;
+                background-color: $standard-deep-black;
+            }
+            p {
+                line-height: 0px;
+                height: 23px;
+                color: $standard-deep-gray;
+            }
+            .icon-win {
+                @include wd-image('icon-win.png');
+            }
+            .icon-apple {
+                @include wd-image('icon-apple.png');
+            }
+            .icon-android {
+                @include wd-image('icon-android.png');
+            }
+        }
+    }
+}

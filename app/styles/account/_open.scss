@@ -1,0 +1,81 @@
+.wd-account-open {
+    position: relative;
+    padding: 0px;
+    .nav {
+        width: 230px;
+        border-right: 1px solid $standard-deep-gray;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        .nav-header {
+            height: 40px;
+            line-height: 40px;
+            padding-left: 10px;
+            border-bottom: 1px solid $standard-deep-gray;
+            background-color: $standard-gray;
+            p {
+                font-size: 16px;
+            }
+        }
+        .nav-body {
+            margin-top: 20px;
+            .item {
+                height: 60px;
+                line-height: 60px;
+                padding-left: 30px;
+                p {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    .body {
+        margin-left: 231px;
+        .h2-title {
+            font-size: 23px;
+            margin: 0px 30px;
+            padding: 10px 0px 13px 10px; 
+            border-bottom: 1px solid $standard-gray;
+        }
+        .fill-form {
+            margin-left: 43px;
+            .form-title {
+                margin-top: 28px;
+                padding-bottom: 8px;
+                font-size: 18px;
+                border-bottom: 1px solid $standard-gray;
+            }
+            .item {
+                margin: 20px 0px 10px 20px;
+                font-size: 13px;
+                p {
+                    display: inline;
+                }
+                .item-title {
+                    display: inline-block;
+                    width: 130px;
+                }
+                input[type=radio] {
+                    margin: 0px 5px 0px 15px;
+                }
+            }
+        }
+        .toolbar {
+            margin-top: 50px;
+            height: 50px;
+            background-color: $standard-gray;
+            border-top: 1px solid $standard-deep-gray;
+            line-height: 50px;
+            .btns {
+                float: right;
+                margin-right: 20px;
+                .submit-btn {
+                    margin-left: 15px;
+                    margin-top: 7px;
+                    width: 80px;
+                }
+            }
+        }
+    }
+}

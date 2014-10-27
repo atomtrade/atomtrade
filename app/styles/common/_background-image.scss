@@ -1,4 +1,5 @@
 @mixin wd-image($name) {
+    display: inline-block;
     background: url('../images/' + $name) no-repeat 50% 50%;
     width: image-width($name);
     height: image-height($name);

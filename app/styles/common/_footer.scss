@@ -1,7 +1,5 @@
 .wd-footer {
-    position: relative;
-    margin: 0 auto;
-    width: $page-width;
+    margin: 0 auto -25px auto;
     min-width: $min-page-width;
     height: 270px;
     background-color: $standard-black;
@@ -31,9 +29,12 @@
     }
     .right {
         position: absolute;
-        top: 40px;
+        top: 50px;
         right: 40px;
         text-align: center;
+        .title {
+            font-size: 20px;
+        }
     }
     .bottom-tips {
         border-top: 1px solid #333;

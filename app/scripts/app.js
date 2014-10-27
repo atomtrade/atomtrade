@@ -14,32 +14,24 @@ angular
 .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 $routeProvider
     .when('/index', {
-        templateUrl: 'views/account/index.html',
-        controller: 'registerCtrl'
+        templateUrl: 'views/index/index.html',
+        controller: 'indexCtrl'
+    })
+    .when('/download', {
+        templateUrl: 'views/index/download.html',
+        controller: 'downloadCtrl'
     })
     .when('/account-register', {
         templateUrl: 'views/account/register.html',
         controller: 'registerCtrl'
     })
-    .when('/account-trade-range', {
-        templateUrl: 'views/account/trade-range.html',
-        controller: 'registerCtrl'
+    .when('/account-login', {
+        templateUrl: 'views/account/login.html',
+        controller: 'loginCtrl'
     })
-    .when('/account-experience', {
-        templateUrl: 'views/account/experience.html',
-        controller: 'registerCtrl'
-    })
-    .when('/account-risk', {
-        templateUrl: 'views/account/risk.html',
-        controller: 'registerCtrl'
-    })
-    .when('/account-check-info', {
-        templateUrl: 'views/account/check-info.html',
-        controller: 'registerCtrl'
-    })
-    .when('/account-finish', {
-        templateUrl: 'views/account/finish-register.html',
-        controller: 'registerCtrl'
+    .when('/account-open', {
+        templateUrl: 'views/account/open.html',
+        controller: 'openAccountCtrl'
     })
     .otherwise({
         redirectTo: '/index'

@@ -2,9 +2,203 @@
 
 angular.module('atomApp')
 .controller('registerCtrl', 
-['$scope', 'wdAccount', '$timeout', 'wdConfig', 'wdStorage', '$location',
-function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location) {
+['$scope', 'wdAccount', '$timeout', 'wdConfig', 'wdStorage', '$location', '$interval',
+function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval) {
+    $scope.loading = false;
+    $scope.register = {
+        phone: '',
+        verify_code: '',
+        password: '',
+        nickName: '',
+        invite_code: '',
+        uiPhoneTip: '',
+        uiVerifyCodeTip: '',
+        uiPasswordTip: '',
+        uiNickNameTip: '',
+        uiInviteCodeTip: '',
+        uiPhoneError: '',
+        uiVerifyCodeError: '',
+        uiPasswordError: '',
+        uiNickNameError: '',
+        uiInviteCodeError: '',
+        uiCountdown: 0,
+        uiSuccess: false
+    };
 
+    $scope.focusPhone = function() {
+        $scope.register.uiPhoneTip = '请输入您的手机号码，然后点击下面的「获取验证码」按钮';
+        $scope.register.uiPhoneError = '';
+    };
+    $scope.focusVerifyCode = function() {
+        $scope.register.uiVerifyCodeTip = '点击「获取验证码」按钮，然后输入手机短信中的验证码';
+        $scope.register.uiVerifyCodeError = '';
+    };
+    $scope.focusPassword = function() {
+        $scope.register.uiPasswordTip = '密码必须要大于 6 个字符，要包含数字和字母';
+        $scope.register.uiPasswordError = '';
+    };
+    $scope.focusNickName = function() {
+        $scope.register.uiNickNameTip = '4-20 个字符，支持中文、字母、数字和符号';
+        $scope.register.uiNickNameError = '';
+    };
+    $scope.focusInviteCode = function() {
+        $scope.register.uiInviteCodeTip = '选填，输入邀请码或者邀请人的手机号';
+        $scope.register.uiInviteCodeError = '';
+    };
+
+    $scope.blurPhone = function() {
+        $scope.register.uiPhoneTip = '';
+        $scope.checkPhone();
+    };
+    $scope.blurVerifyCode = function() {
+        $scope.register.uiVerifyCodeTip = '';
+        $scope.checkVerifyCode();
+    };
+    $scope.blurPassword = function() {
+        $scope.register.uiPasswordTip = '';
+        $scope.checkPassword();
+    };
+    $scope.blurNickName = function() {
+        $scope.register.uiNickNameTip = '';
+        $scope.checkNickName();
+    };
+    $scope.blurInviteCode = function() {
+        $scope.register.uiInviteCodeTip = '';
+        $scope.checkNickName();
+    };
+
+    $scope.checkPhone = function() {
+        if (!$scope.register.phone) {
+            $scope.register.uiPhoneError = '手机号不能为空';
+            return false;
+        } else if (/\D/g.test($scope.register.phone)) {
+            $scope.register.uiPhoneError = '手机号不能非数字字符';
+            return false;
+        } else {
+            $scope.register.uiPhoneError = '';
+            return true;
+        }
+    };
+
+    $scope.checkVerifyCode = function() {
+        if (!$scope.register.verify_code) {
+            $scope.register.uiVerifyCodeError = '验证码不能为空';
+            return false;
+        } else {
+            $scope.register.uiVerifyCodeError = '';
+            return true;
+        }
+    };
+
+    $scope.checkPassword = function() {
+        if (!$scope.register.password) {
+            $scope.register.uiPasswordError = '密码不能为空';
+            return false;
+        } else if (!/\D/.test($scope.register.password)) {
+            $scope.register.uiPasswordError = '密码不能为纯数字';
+            return false;
+        } else if (!/[^A-Za-z]/.test($scope.register.password)) {
+            $scope.register.uiPasswordError = '密码不能为纯字母';
+            return false;
+        } else if ($scope.register.password.length < 6) {
+            $scope.register.uiPasswordError = '密码不能小于 6 位';
+            return false;
+        } else {
+            $scope.register.uiPasswordError = '';
+            return true;
+        }
+    };
+
+    $scope.checkNickName = function() {
+        if (!$scope.register.nickName) {
+            $scope.register.uiNickNameError = '昵称不能为空';
+            return false;
+        } else {
+            $scope.register.uiNickNameError = '昵称不能为空';
+            return true;
+        }
+    };
+
+    $scope.startCountdown = function() {
+        $scope.register.uiCountdown = 30;
+        var t = $interval(function() {
+            $scope.register.uiCountdown --;
+            if (!$scope.register.uiCountdown) {
+                $interval.cancel(t);
+            }
+        }, 1000);
+    };
+
+    $scope.verifyPhone = function() {
+        $scope.startCountdown();
+        return wdAccount.verifyPhone($scope.register.phone);
+    };
+
+    $scope.registerAccount = function() {
+        $scope.loading = true;
+        $timeout(function() {
+            $scope.loading = false;
+            $scope.register.uiSuccess = true;
+        }, 3000);
+        wdAccount.register($scope.register).then(function(data) {
+            $scope.register.uiSuccess = true;
+            $scope.loading = false;
+        }, function(data) {
+            console.log(data);
+        });
+    };
+
+    // $scope.$on('wd-upload-form-success', function(e, data) {
+    //     switch(data.face) {
+    //         case 'front':
+    //             $scope.$apply(function() {
+    //                 $scope.person.uiFrontImageError = '';
+    //                 $scope.person.uiFrontImageStatus = 2;
+    //             });
+    //         break;
+    //         case 'back':
+    //             $scope.$apply(function() {
+    //                 $scope.person.uiBackImageError = '';
+    //                 $scope.person.uiBackImageStatus = 2;
+    //             });
+    //         break;
+    //     }
+    // });
+    // $scope.$on('wd-upload-form-start', function(e, data) {
+    //     switch(data.face) {
+    //         case 'front':
+    //             $scope.$apply(function() {
+    //                 $scope.person.uiFrontImageError = '';
+    //                 $scope.person.uiFrontImageStatus = 1;
+    //             });
+    //         break;
+    //         case 'back':
+    //             $scope.$apply(function() {
+    //                 $scope.person.uiBackImageError = '';
+    //                 $scope.person.uiBackImageStatus = 1;
+    //             });
+    //         break;
+    //     }
+    // });
+    // $scope.$on('wd-upload-form-error', function(e, data) {
+    //     switch(data.face) {
+    //         case 'front':
+    //             $scope.$apply(function() {
+    //                 $scope.person.uiFrontImageError = '上传失败';
+    //                 $scope.person.uiFrontImageStatus = 3;
+    //             });
+    //         break;
+    //         case 'back':
+    //             $scope.$apply(function() {
+    //                 $scope.person.uiBackImageError = '上传失败';
+    //                 $scope.person.uiBackImageStatus = 3;
+    //             });
+    //         break;
+    //     }
+    // });
+
+
+/*
     $scope.step = Number(wdStorage.item('register-step')) || 1;
     $scope.loading = true;
     $scope.uploadUrl = wdConfig.apiUrl + '/upload';
@@ -14,7 +208,8 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location) {
         password: '',
         uiPhoneError: '',
         uiVerifyCodeError: '',
-        uiPasswordError: ''
+        uiPasswordError: '',
+        uiInviteCodeError: ''
     };
 
     $scope.person = {
@@ -36,45 +231,6 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location) {
         uiFrontImageError: '',
         uiBackImageError: ''
     };
-
-    function checkPhone() {
-        if (!$scope.signIn.phone) {
-            $scope.signIn.uiPhoneError = '手机号不能为空';
-            return false;
-        } else {
-            $scope.signIn.uiPhoneError = '';
-            return true;
-        }
-    }
-
-    function checkVerifyCode() {
-        if (!$scope.signIn.verify_code) {
-            $scope.signIn.uiVerifyCodeError = '验证码不能为空';
-            return false;
-        } else {
-            $scope.signIn.uiVerifyCodeError = '';
-            return true;
-        }
-    }
-
-    function checkPassword() {
-        if (!$scope.signIn.password) {
-            $scope.signIn.uiPasswordError = '密码不能为空';
-            return false;
-        } else if (!/\D/.test($scope.signIn.password)) {
-            $scope.signIn.uiPasswordError = '密码不能为纯数字';
-            return false;
-        } else if (!/[^A-Za-z]/.test($scope.signIn.password)) {
-            $scope.signIn.uiPasswordError = '密码不能为纯字母';
-            return false;
-        } else if ($scope.signIn.password.length < 6) {
-            $scope.signIn.uiPasswordError = '密码不能小于 6 位';
-            return false;
-        } else {
-            $scope.signIn.uiPasswordError = '';
-            return true;
-        }
-    }
 
     $scope.goToRegister = function() {
         if (checkPhone() && checkPassword()) {
@@ -118,18 +274,8 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location) {
             goToIndex();
         }
     };
-    function verifyPhone() {
-        return wdAccount.verifyPhone($scope.signIn.phone);
-    }
-    function register() {
-        getPassword();
-        getPhone();
-        wdAccount.register($scope.signIn).then(function(data) {
-            console.log(data);
-        }, function(data) {
-            console.log(data);
-        });
-    }
+
+
 
     function checkRealName() {
         if (!$scope.person.real_name) {
@@ -239,54 +385,7 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location) {
         $location.path('/money');
     }
 
-    $scope.$on('wd-upload-form-success', function(e, data) {
-        switch(data.face) {
-            case 'front':
-                $scope.$apply(function() {
-                    $scope.person.uiFrontImageError = '';
-                    $scope.person.uiFrontImageStatus = 2;
-                });
-            break;
-            case 'back':
-                $scope.$apply(function() {
-                    $scope.person.uiBackImageError = '';
-                    $scope.person.uiBackImageStatus = 2;
-                });
-            break;
-        }
-    });
-    $scope.$on('wd-upload-form-start', function(e, data) {
-        switch(data.face) {
-            case 'front':
-                $scope.$apply(function() {
-                    $scope.person.uiFrontImageError = '';
-                    $scope.person.uiFrontImageStatus = 1;
-                });
-            break;
-            case 'back':
-                $scope.$apply(function() {
-                    $scope.person.uiBackImageError = '';
-                    $scope.person.uiBackImageStatus = 1;
-                });
-            break;
-        }
-    });
-    $scope.$on('wd-upload-form-error', function(e, data) {
-        switch(data.face) {
-            case 'front':
-                $scope.$apply(function() {
-                    $scope.person.uiFrontImageError = '上传失败';
-                    $scope.person.uiFrontImageStatus = 3;
-                });
-            break;
-            case 'back':
-                $scope.$apply(function() {
-                    $scope.person.uiBackImageError = '上传失败';
-                    $scope.person.uiBackImageStatus = 3;
-                });
-            break;
-        }
-    });
+
 
     // 进入时的逻辑
     wdAccount.check().then(function(data) {
@@ -313,4 +412,6 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location) {
     }, function(data) {
         $scope.loading = false;
     });
+*/
+
 }]);
