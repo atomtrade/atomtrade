@@ -29,17 +29,35 @@
     }
     .right {
         position: absolute;
-        top: 50px;
+        top: 40px;
         right: 40px;
         text-align: center;
         .title {
             font-size: 20px;
+            .icon-phone {
+                @include wd-image('icon-phone.png');
+                margin-bottom: -8px;
+                margin-right: 4px;
+            }
         }
     }
     .bottom-tips {
         border-top: 1px solid #333;
         position: absolute;
         bottom: 0px;
-        padding: 15px 20px 10px 20px;
+        padding: 5px 20px 10px 20px;
+    }
+    .online-btn {
+        width: 170px;
+        margin-top: 10px;
+        line-height: 40px;
+        height: 40px;
+        border-radius: 3px;
+        color: $standard-white;
+        font-size: 20px;
+        .icon-sms {
+            @include wd-image('icon-sms.png');
+            margin-right: 10px;
+        }
     }
 }
