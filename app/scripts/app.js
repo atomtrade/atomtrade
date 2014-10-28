@@ -39,6 +39,12 @@ $routeProvider
     .when('/about-license', {
         templateUrl: 'views/about/license.html'
     })
+    .when('/about-contact', {
+        templateUrl: 'views/about/contact.html'
+    })
+    .when('/my-index', {
+        templateUrl: 'views/my/index.html'
+    })
     .otherwise({
         redirectTo: '/index'
     });

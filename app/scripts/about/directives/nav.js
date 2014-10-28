@@ -17,6 +17,9 @@ return {
             case '/about-license':
                 btns.eq(1).addClass('active');
             break;
+            case '/about-contact':
+                btns.eq(2).addClass('active');
+            break;
         }
     }
 };
