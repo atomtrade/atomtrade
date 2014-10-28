@@ -14,7 +14,7 @@
             padding-left: 10px;
             border-bottom: 1px solid $standard-deep-gray;
             background-color: $standard-gray;
-            p {
+            a, p {
                 font-size: 16px;
             }
         }
@@ -24,7 +24,7 @@
                 height: 60px;
                 line-height: 60px;
                 padding-left: 30px;
-                p {
+                a, p {
                     font-size: 16px;
                 }
             }
@@ -32,6 +32,7 @@
     }
     .body {
         margin-left: 231px;
+        padding-bottom: 80px;
         .h2-title {
             font-size: 23px;
             margin: 0px 30px;
@@ -47,7 +48,7 @@
                 border-bottom: 1px solid $standard-gray;
             }
             .item {
-                margin: 20px 0px 10px 20px;
+                margin: 20px 0px 10px 10px;
                 font-size: 13px;
                 p {
                     display: inline;
@@ -56,25 +57,28 @@
                     display: inline-block;
                     width: 130px;
                 }
-                input[type=radio] {
+                input[type=radio], input[type=checkbox] {
                     margin: 0px 5px 0px 15px;
                 }
             }
         }
-        .toolbar {
-            margin-top: 50px;
-            height: 50px;
-            background-color: $standard-gray;
-            border-top: 1px solid $standard-deep-gray;
-            line-height: 50px;
-            .btns {
-                float: right;
-                margin-right: 20px;
-                .submit-btn {
-                    margin-left: 15px;
-                    margin-top: 7px;
-                    width: 80px;
-                }
+    }
+    .toolbar {
+        position: absolute;
+        bottom: 0px;
+        margin-top: 50px;
+        height: 50px;
+        width: 100%;
+        background-color: $standard-gray;
+        border-top: 1px solid $standard-deep-gray;
+        line-height: 50px;
+        .btns {
+            float: right;
+            margin-right: 20px;
+            .submit-btn {
+                margin-left: 15px;
+                margin-top: 7px;
+                width: 80px;
             }
         }
     }

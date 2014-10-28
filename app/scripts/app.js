@@ -33,6 +33,12 @@ $routeProvider
         templateUrl: 'views/account/open.html',
         controller: 'openAccountCtrl'
     })
+    .when('/about-company', {
+        templateUrl: 'views/about/company.html'
+    })
+    .when('/about-license', {
+        templateUrl: 'views/about/license.html'
+    })
     .otherwise({
         redirectTo: '/index'
     });

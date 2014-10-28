@@ -9,17 +9,14 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         phone: '',
         verify_code: '',
         password: '',
-        nickName: '',
         invite_code: '',
         uiPhoneTip: '',
         uiVerifyCodeTip: '',
         uiPasswordTip: '',
-        uiNickNameTip: '',
         uiInviteCodeTip: '',
         uiPhoneError: '',
         uiVerifyCodeError: '',
         uiPasswordError: '',
-        uiNickNameError: '',
         uiInviteCodeError: '',
         uiCountdown: 0,
         uiSuccess: false
@@ -36,10 +33,6 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
     $scope.focusPassword = function() {
         $scope.register.uiPasswordTip = '密码必须要大于 6 个字符，要包含数字和字母';
         $scope.register.uiPasswordError = '';
-    };
-    $scope.focusNickName = function() {
-        $scope.register.uiNickNameTip = '4-20 个字符，支持中文、字母、数字和符号';
-        $scope.register.uiNickNameError = '';
     };
     $scope.focusInviteCode = function() {
         $scope.register.uiInviteCodeTip = '选填，输入邀请码或者邀请人的手机号';
@@ -58,13 +51,8 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         $scope.register.uiPasswordTip = '';
         $scope.checkPassword();
     };
-    $scope.blurNickName = function() {
-        $scope.register.uiNickNameTip = '';
-        $scope.checkNickName();
-    };
     $scope.blurInviteCode = function() {
         $scope.register.uiInviteCodeTip = '';
-        $scope.checkNickName();
     };
 
     $scope.checkPhone = function() {
@@ -109,16 +97,6 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         }
     };
 
-    $scope.checkNickName = function() {
-        if (!$scope.register.nickName) {
-            $scope.register.uiNickNameError = '昵称不能为空';
-            return false;
-        } else {
-            $scope.register.uiNickNameError = '昵称不能为空';
-            return true;
-        }
-    };
-
     $scope.startCountdown = function() {
         $scope.register.uiCountdown = 30;
         var t = $interval(function() {
@@ -139,7 +117,7 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         $timeout(function() {
             $scope.loading = false;
             $scope.register.uiSuccess = true;
-        }, 3000);
+        }, 2000);
         wdAccount.register($scope.register).then(function(data) {
             $scope.register.uiSuccess = true;
             $scope.loading = false;

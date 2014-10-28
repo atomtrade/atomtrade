@@ -9,6 +9,7 @@
         height: 260px;
         padding: 18px 20px 20px 20px;
         .block {
+            position: relative;
             padding-top: 30px;
             cursor: pointer;
             display: inline-block;
@@ -29,6 +30,13 @@
             @include transition(opacity, 0.8s);
             &:hover {
                 @include opacity(1);
+            }
+            .link {
+                position: absolute;
+                top: 0px;
+                bottom: 0px;
+                left: 0px;
+                right: 0px;
             }
             p {
                 line-height: 0px;

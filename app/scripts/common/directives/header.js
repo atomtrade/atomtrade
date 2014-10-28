@@ -10,13 +10,17 @@ return {
     scope: true,
     link: function(scope, element, attributes) {
         var btns = element.find('.nav-btns').find('.btn').removeClass('active');
-        switch ($location.path()) {
+        var path = $location.path();
+        switch (path) {
             case '/index':
                 btns.eq(0).addClass('active');
             break;
             case '/download':
                 btns.eq(1).addClass('active');
             break;
+        }
+        if (/\/about/.test(path)) {
+            btns.eq(2).addClass('active');
         }
     }
 };

@@ -25,7 +25,7 @@
             ng-blur="blurVerifyCode();">
             <div class="btn auth-code-btn">
                 <p ng-if="!register.uiCountdown" ng-click="verifyPhone();">获取验证码</p>
-                <p ng-if="register.uiCountdown">{{register.uiCountdown}}</p>
+                <p ng-if="register.uiCountdown">{{register.uiCountdown}} 秒</p>
             </div>
             <div class="form-item-tips" 
             ng-class="{
@@ -46,19 +46,6 @@
                 error: register.uiPasswordError
             }">
                 <p>{{register.uiPasswordTip || register.uiPasswordError}}</p>
-            </div>
-        </div>
-        <div class="item">
-            <p class="title">昵称</p>
-            <input type="text" ng-model="register.nickName" 
-            ng-focus="focusNickName();"
-            ng-blur="blurNickName();">
-            <div class="form-item-tips" 
-            ng-class="{
-                hide: !register.uiNickNameTip && !register.uiNickNameError,
-                error: register.uiNickNameError
-            }">
-                <p>{{register.uiNickNameTip || register.uiNickNameError}}</p>
             </div>
         </div>
         <div class="item">

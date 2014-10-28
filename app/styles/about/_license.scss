@@ -1,0 +1,34 @@
+.wd-about-license {
+    .stock {
+        @include wd-image('license/stock.jpg');
+        display: block;
+        margin: 0px auto;
+        background-size: contain;
+        width: 500px;
+        height: 600px;
+    }
+    .participants {
+        @include wd-image('license/participants.jpg');
+        display: block;
+        margin: 0px auto;
+        background-size: contain;
+        width: 500px;
+        height: 380px;
+    }
+    .registration {
+        @include wd-image('license/registration.jpg');
+        display: block;
+        margin: 0px auto;
+        background-size: contain;
+        width: 500px;
+        height: 680px;
+    }
+    .business {
+        @include wd-image('license/business.jpg');
+        display: block;
+        margin: 0px auto;
+        background-size: contain;
+        width: 500px;
+        height: 680px;
+    }
+}
