@@ -1,62 +1,54 @@
 .wd-account-register {
-    position: relative;
     .h2-title {
-        margin: 0px 50px;
-        padding: 0px 0px 13px 10px; 
-        border-bottom: 1px solid $standard-gray;
+        margin-top: 5px;
+        line-height: 40px;
+        height: 40px;
+        p {
+            font-size: 18px;
+        }
     }
     .form {
-        input[type=text] {
-            width: 200px;
-            &.auth-code-input {
-                width: 104px;
-            }
-        }
-        margin-top: 30px;
-        margin-left: 18%;
-        .item {
-            margin: 20px 0px;
-            p {
-                display: inline-block;
-                font-size: 15px;
-            }
-            .title {
-                width: 150px;
-            }
+        .auth-code-input {
+            display: inline-block;
+            width: 45%;
         }
         .auth-code-btn {
-            padding: 5px 8px;
-            width: 75px;
-        }
-        .form-item-tips {
-            display: inline-block;
-            padding: 2px 10px;
-            margin-left: 15px;
-            height: 24px;
-            line-height: 24px;
-            vertical-align: top;
+            width: 30%;
+            min-width: 80px;
+            height: 30px;
+            margin-top: 5px;
+            line-height: 30px;
             p {
-                font-size: 13px;
+                font-size: 16px;
             }
         }
-    }
-    .register-btn {
-        margin-top: 20px;
-        margin-left: 155px;
-    }
-    .ask {
-        margin-left: 155px;
-        margin-top: 5px;
-        p {
-            display: inline-block;
+        .register-btn {
+            margin-top: 5px;
+            margin-left: 1px;
+            width: 89%;
+        }
+        .ask {
+            margin-top: 10px;
+            padding-left: 5px;
+            p {
+                display: inline;
+            }
         }
     }
     .success {
-        padding-top: 60px;
+        padding-top: 30px;
         text-align: center;
         .title {
-            margin-bottom: 28px;
-            font-size: 20px;
+            font-weight: bold;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+        }
+        .btn {
+            width: 88%;
+            margin: 20px 0px;
         }
     }
 }

@@ -13,40 +13,20 @@ angular
 ['ngCookies', 'ngResource', 'ngRoute', 'ngSanitize'])
 .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 $routeProvider
-    .when('/index', {
-        templateUrl: 'views/index/index.html',
-        controller: 'indexCtrl'
-    })
-    .when('/download', {
-        templateUrl: 'views/index/download.html',
-        controller: 'downloadCtrl'
+    .when('/account-login', {
+        templateUrl: 'views/account/login.html',
+        controller: 'loginCtrl'
     })
     .when('/account-register', {
         templateUrl: 'views/account/register.html',
         controller: 'registerCtrl'
     })
-    .when('/account-login', {
-        templateUrl: 'views/account/login.html',
-        controller: 'loginCtrl'
-    })
     .when('/account-open', {
         templateUrl: 'views/account/open.html',
         controller: 'openAccountCtrl'
     })
-    .when('/about-company', {
-        templateUrl: 'views/about/company.html'
-    })
-    .when('/about-license', {
-        templateUrl: 'views/about/license.html'
-    })
-    .when('/about-contact', {
-        templateUrl: 'views/about/contact.html'
-    })
-    .when('/my-index', {
-        templateUrl: 'views/my/index.html'
-    })
     .otherwise({
-        redirectTo: '/index'
+        redirectTo: '/account-login'
     });
 
     // 全局 $http 请求配置。

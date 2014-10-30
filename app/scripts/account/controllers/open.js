@@ -4,7 +4,7 @@ angular.module('atomApp')
 .controller('openAccountCtrl', 
 ['$scope', 'wdAccount', '$timeout', '$location', 'wdStorage',
 function ($scope, wdAccount, $timeout, $location, wdStorage) {
-    $scope.step = 1;
+    $scope.step = 0;
     $scope.data = {
         // 交易品种
         // 股票和期权

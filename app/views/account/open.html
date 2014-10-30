@@ -1,211 +1,212 @@
 <div wd-header></div>
 <div class="wd-account-open wd-body">
-    <div class="nav">
+    <div class="nav" ng-class="{hide: step !== 0}">
         <div class="nav-header">
             <p>开户流程指引</p>
         </div>
         <div class="nav-body">
-            <div class="item">
-                <a ng-click="step = 1;">填写表格</a>
+            <div class="item" ng-click="step = 1;">
+                <p ng-class="{active: step === 0}">
+                    <span class="step">1、</span>
+                    填写表格
+                    <span ng-if="step === 0" class="right-flag">&gt;</span>
+                </p>
             </div>
             <div class="item">
-                <a ng-click="step = 2;">风险评估</a>
+                <p>2、完成见证</p>
             </div>
             <div class="item">
-                <p>完成见证</p>
+                <p>3、提交资料</p>
             </div>
             <div class="item">
-                <p>提交资料</p>
-            </div>
-            <div class="item">
-                <p>开户成功</p>
+                <p>4、开户成功</p>
             </div>
         </div>
     </div>
     <div class="body" ng-class="{hide: step !== 1}">
-        <p class="h2-title">填写开户表格</p>
+        <p class="h2-title">开户资料</p>
         <div class="fill-form">
-            <p class="form-title">交易范围</p>
             <div class="item">
-                <p class="item-title">品种</p>
+                <p class="item-title">交易品种：</p>
                 <input type="checkbox" name="b">证券
                 <input type="checkbox" name="b">期货       
             </div>
-            <p class="form-title">基本资料</p>
             <div class="item">
-                <p class="item-title">中文名</p>
-                <input type="text">
-                <p class="error"></p>
+                <input type="text" placeholder="姓名">
             </div>
             <div class="item">
-                <p class="item-title">身份证号码</p>
-                <input type="text">
+                <input type="text" placeholder="身份证号">
             </div>
             <div class="item">
-                <p class="item-title">签发机构</p>
-                <input type="text" wd-placeholder="身份证背面" ng-model="a">
+                <input type="text" placeholder="签发机构（身份证背面）">
             </div>
             <div class="item">
-                <p class="item-title">住宅地址</p>
-                <input type="text" wd-placeholder="请填写身份证上地址" ng-model="a">
-            </div>
-            <p class="form-title">联系方式</p>
-            <div class="item">
-                <p class="item-title">电子邮箱</p>
-                <input type="text">
+                <input type="text" placeholder="电子邮箱">
             </div>
             <div class="item">
-                <p class="item-title">QQ 号码</p>
-                <input type="text">
+                <input type="text" placeholder="QQ 号码">
             </div>
             <div class="item">
-                <p class="item-title">通信地址</p>
-                <input type="text" wd-placeholder="请填写身份证上地址" ng-model="a">
-            </div>
-            <p class="form-title">职业信息</p>
-            <div class="item">
-                <p class="item-title">类别</p>
-                <input type="radio" name="b">受雇
-                <input type="radio" name="b">自营
-                <input type="radio" name="b">退休
-                <input type="radio" name="b">待业
-                <input type="radio" name="b">其他
+                <p class="item-title">职业状态：</p>
+                <select>
+                    <option value="">受雇</option>
+                    <option value="">自营</option>
+                    <option value="">退休</option>
+                    <option value="">待业</option>
+                    <option value="">其他</option>
+                </select>
             </div>
             <div class="item">
-                <p class="item-title">工作单位</p>
-                <input type="text">
+                <input type="text" placeholder="公司名称">
             </div>            
             <div class="item">
-                <p class="item-title">所属行业</p>
-                <input type="text">
+                <input type="text" placeholder="所属行业">
             </div>
-            <div class="item">
-                <p class="item-title">工作电话</p>
-                <input type="text">
-            </div>
-            <div class="item">
-                <p class="item-title">工作地址</p>
-                <input type="text">
-            </div>
+            <div class="btn" ng-click="nextStep();">保存，下一步</div>
         </div>
     </div>
     <div class="body" ng-class="{hide: step !== 2}">
         <p class="h2-title">风险评估表</p>
         <div class="fill-form">
-            <p class="form-title">财务及投资状况</p>
             <div class="item">
                 <p class="item-title">资金来源</p>
-                <input type="radio" name="c">薪资
-                <input type="radio" name="c">存款
-                <input type="radio" name="c">遗产/受赠
-                <input type="radio" name="c">投资收益
+                <select>
+                    <option value="">薪资</option>
+                    <option value="">存款</option>
+                    <option value="">遗产/受赠</option>
+                    <option value="">投资收益</option>
+                </select>
             </div>
             <div class="item">
                 <p class="item-title">全年收入</p>
-                <input type="radio" name="c">小于 20 万
-                <input type="radio" name="c">20-50 万
-                <input type="radio" name="c">50-100 万
-                <input type="radio" name="c">大于 100 万
+                <select>
+                    <option value="">小于 20 万</option>
+                    <option value="">20-50 万</option>
+                    <option value="">50-100 万</option>
+                    <option value="">大于 100 万</option>
+                </select>
             </div>
             <div class="item">
                 <p class="item-title">总资产净值</p>
-                <input type="radio" name="d">小于 50 万
-                <input type="radio" name="d">50-250 万
-                <input type="radio" name="d">250-500 万
-                <input type="radio" name="d">大于 500 万
+                <select>
+                    <option value="">小于 50 万</option>
+                    <option value="">50-250 万</option>
+                    <option value="">250-500 万</option>
+                    <option value="">大于 500 万</option>
+                </select>
             </div>
             <div class="item">
                 <p class="item-title">预计入金</p>
-                <input type="radio" name="c">小于 20 万
-                <input type="radio" name="c">20-50 万
-                <input type="radio" name="c">50-100 万
-                <input type="radio" name="c">大于 100 万
+                <select>
+                    <option value="">小于 20 万</option>
+                    <option value="">20-50 万</option>
+                    <option value="">50-100 万</option>
+                    <option value="">大于 100 万</option>
+                </select>
             </div>
             <div class="item">
                 <p class="item-title">投资知识</p>
-                <input type="radio" name="e">精通
-                <input type="radio" name="e">良好
-                <input type="radio" name="e">较好
-                <input type="radio" name="e">有限
-                <input type="radio" name="e">全无
+                <select>
+                    <option value="">精通</option>
+                    <option value="">良好</option>
+                    <option value="">较好</option>
+                    <option value="">有限</option>
+                    <option value="">全无</option>
+                </select>
             </div>
             <div class="item">
                 <p class="item-title">投资目标</p>
-                <input type="radio" name="f">增值
-                <input type="radio" name="f">收入
-                <input type="radio" name="f">投机
-                <input type="radio" name="f">对冲
-                <input type="radio" name="f">其他
+                <select>
+                    <option value="">增值</option>
+                    <option value="">收入</option>
+                    <option value="">投机</option>
+                    <option value="">对冲</option>
+                    <option value="">其他</option>
+                </select>
             </div>
             <div class="item">
                 <p class="item-title">风险承受能力</p>
-                <input type="radio" name="h">高
-                <input type="radio" name="h">中
-                <input type="radio" name="h">低
+                <select>
+                    <option value="">低</option>
+                    <option value="">中</option>
+                    <option value="">高</option>
+                </select>
             </div>
-            <p class="form-title">投资经验</p>
             <div class="item">
                 <p class="item-title">股票</p>
-                <input type="radio" name="c">没有经验
-                <input type="radio" name="c">少于 1 年
-                <input type="radio" name="c">1-2 年
-                <input type="radio" name="c">3 年以上
+                <select>
+                    <option value="">没有经验</option>
+                    <option value="">少于 1 年</option>
+                    <option value="">1-2 年</option>
+                    <option value="">3 年以上</option>
+                </select>
             </div>
             <div class="item">
                 <p class="item-title">固定收益产品</p>
-                <input type="radio" name="c">没有经验
-                <input type="radio" name="c">少于 1 年
-                <input type="radio" name="c">1-2 年
-                <input type="radio" name="c">3 年以上
+                <select>
+                    <option value="">没有经验</option>
+                    <option value="">少于 1 年</option>
+                    <option value="">1-2 年</option>
+                    <option value="">3 年以上</option>
+                </select>
             </div>
             <div class="item">
                 <p class="item-title">债券</p>
-                <input type="radio" name="c">没有经验
-                <input type="radio" name="c">少于 1 年
-                <input type="radio" name="c">1-2 年
-                <input type="radio" name="c">3 年以上
+                <select>
+                    <option value="">没有经验</option>
+                    <option value="">少于 1 年</option>
+                    <option value="">1-2 年</option>
+                    <option value="">3 年以上</option>
+                </select>
             </div>
             <div class="item">
                 <p class="item-title">期货/期货期权</p>
-                <input type="radio" name="c">没有经验
-                <input type="radio" name="c">少于 1 年
-                <input type="radio" name="c">1-2 年
-                <input type="radio" name="c">3 年以上
+                <select>
+                    <option value="">没有经验</option>
+                    <option value="">少于 1 年</option>
+                    <option value="">1-2 年</option>
+                    <option value="">3 年以上</option>
+                </select>
             </div>
             <div class="item">
                 <p class="item-title">外汇/贵金属</p>
-                <input type="radio" name="c">没有经验
-                <input type="radio" name="c">少于 1 年
-                <input type="radio" name="c">1-2 年
-                <input type="radio" name="c">3 年以上
+                <select>
+                    <option value="">没有经验</option>
+                    <option value="">少于 1 年</option>
+                    <option value="">1-2 年</option>
+                    <option value="">3 年以上</option>
+                </select>
             </div>
-            <p class="form-title">衍生投资品（例如涡轮、牛熊证、ETF 等）的认知评估</p>
-            <p class="form-title">其他资料披露</p>
+            <div class="btn" ng-click="nextStep();">保存，下一步</div>
+        </div>
+    </div>
+    <div class="body" ng-class="{hide: step !== 3}">
+        <p class="h2-title">其他信息</p>
+        <div class="fill-form-long">
             <div class="item">
-                <input type="checkbox">
+                <input type="checkbox" checked="checked">
                 <p>本人是否本账户的最终及唯一受益拥有人？</p>
             </div>
             <div class="item">
-                <input type="checkbox">
+                <input type="checkbox" checked="checked">
                 <p>本人是否与国京(香港)证券与期货有限公司或其子公司及关联公司的董事或雇员有任何关系？</p>
             </div>
             <div class="item">
-                <input type="checkbox">
+                <input type="checkbox" checked="checked">
                 <p>本人是否为香港证券及期货事务监察委员会注册持牌人 (或注册人)、任何持牌法团 (或注册机构) 的董事、雇员或认可人士？</p>
             </div>
             <div class="item">
-                <input type="checkbox">
+                <input type="checkbox" checked="checked">
                 <p>您是否在国京(香港)证券与期货有限公司已开设由您或您代表他人、团体或公司实益持有、拥有或运作、或您拥有直接或间接利益的账户？</p>
             </div>
-            <p class="form-title">请确认已阅读并同意以下条款细则</p>
             <div class="item">
-                <input type="checkbox">
+                <input type="checkbox" checked="checked">
                 <p>我已阅读并同意
                     <a href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/secret.pdf">隐私政策</a>
                 </p>
             </div>
             <div class="item">
-                <input type="checkbox">
+                <input type="checkbox" checked="checked">
                 <p>我已阅读并知悉
                     <a href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/futures_risk.pdf">风险披露声明</a>、
                     <a href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/stock_agrement.pdf">证券客户协议书</a>、
@@ -213,16 +214,18 @@
                 </p>
             </div>
             <div class="item">
-                <input type="checkbox">
+                <input type="checkbox" checked="checked">
                 <p>我已确认上述信息真实有效</p>
             </div>
+            <div class="btn" ng-click="nextStep();">保存，下一步</div>
         </div>
     </div>
-    <div class="toolbar">
-        <div class="btns">
-            <a href="">保存草稿</a>
-            <div class="btn submit-btn" ng-click="nextStep();">提交</div>
-        </div>
+    <div class="success" ng-class="{hide: step !== 4}">
+        <p class="title strong">恭喜您资料提交成功</p>
+        <p>后续我们的工作人员会与你取得联系</p>
+        <p>请保持电话畅通</p>
+        <p class="strong">客户电话：400-150-0852</p>
     </div>
+    <div ng-if="loading" wd-loading></div>
 </div>
 <div wd-footer></div>

@@ -117,7 +117,7 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         $timeout(function() {
             $scope.loading = false;
             $scope.register.uiSuccess = true;
-        }, 2000);
+        }, 1000);
         wdAccount.register($scope.register).then(function(data) {
             $scope.register.uiSuccess = true;
             $scope.loading = false;

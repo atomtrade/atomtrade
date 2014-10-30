@@ -1,70 +1,9 @@
 .wd-header {
-    min-width: $min-page-width;
-    margin: 0 auto;
     background-color: $standard-black;
-    .top-tips {
-        height: 36px;
-        line-height: 36px;
-        color: #7D8185;
-        a {
-            color: #7D8185;     
-        }
-        a, span {
-            margin: 5px;
-        }
-        padding: 2px 35px 0px 35px;
-        .left {
-            float: left;
-        }
-        .right {
-            float: right;
-            .open-btn {
-                color: $standard-white;
-                margin: 3px 0px 0px 0px;
-                padding: 4px 14px;
-                background-color: $standard-green;
-                border-radius: 2px;
-            }
-        }
-    }
-    .body {
-        padding: 20px 35px;
-        background-color: $standard-black;
-        .logo {
-            @include wd-image('logo.png');
-        }
-    }
-    .nav {
-        height: 40px;
-        line-height: 40px;
-        background-color: $standard-light-black;
-        .btn {
-            width: 78px;
-            height: 24px;
-            line-height: 24px;
-            font-size: 18px;
-            background-color: $standard-light-black;
-            &:hover {
-                background-color: $standard-deep-blue;
-            }
-            &.active {
-                background-color: $standard-blue;
-            }
-        }
-        .left {
-            display: block;
-            float: left;
-            height: 100%;
-        }
-        .right {
-            background-color: $standard-orange;
-            height: 100%;
-            display: block;
-            float: right;
-            .buy-btn, .my-btn {
-                margin: 0px 20px;
-                background-color: $standard-orange;
-            }
-        }
+    padding-top: 10px;
+    padding-left: 15px;
+    .logo {
+        @include wd-image('logo.png');
+        width: 170px;
     }
 }

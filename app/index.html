@@ -5,6 +5,8 @@
     <title>ATOM Trade</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="user-scalable=no">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -17,13 +19,6 @@
 <body ng-app="atomApp">
     <div ng-view class="wd-view"></div>
 
-    <!-- build:js(.) scripts/oldieshim.js -->
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-    <!-- endbuild -->
-
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -33,17 +28,17 @@
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <!-- <script src="bower_components/angular-animate/angular-animate.js"></script> -->
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="base/webuploader-0.1.5/webuploader.js"></script>
+    <!-- <script src="base/webuploader-0.1.5/webuploader.js"></script> -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/common/directives/upload-form.js"></script>
+    <!-- <script src="scripts/common/directives/upload-form.js"></script> -->
     <script src="scripts/common/directives/loading.js"></script>
     <script src="scripts/common/directives/width-equal-height.js"></script>
-    <script src="scripts/common/directives/placeholder.js"></script>
+    <!-- <script src="scripts/common/directives/placeholder.js"></script> -->
     <script src="scripts/common/directives/header.js"></script>
     <script src="scripts/common/directives/footer.js"></script>
     <script src="scripts/common/services/config.js"></script>
@@ -54,8 +49,6 @@
     <script src="scripts/account/controllers/register.js"></script>
     <script src="scripts/account/controllers/login.js"></script>
     <script src="scripts/account/controllers/open.js"></script>
-    <script src="scripts/about/directives/nav.js"></script>
-    <script src="scripts/my/directives/nav.js"></script>
     <!-- endbuild -->
 
 </body>

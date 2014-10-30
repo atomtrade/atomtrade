@@ -1,38 +1,28 @@
 .wd-account-login {
-    padding: 60px 0px;
-    min-width: $min-page-width;
-    position: relative;
-    .left {
-        .banner {
-            @include wd-image('login.jpg');
-            margin-left: 5%;
+    text-align: center;
+    height: 100%;
+    background-color: $standard-black;
+    .header {
+        padding-top: 40px;
+        margin-bottom: 20px;
+        .logo {
+            @include wd-image('logo.png');
         }
     }
-    .login-form {
-        background-color: $standard-white;
-        position: absolute;
-        top: 30px;
-        right: 5%;
-        width: 244px;
-        border: 1px solid $standard-deep-gray;
-        padding: 25px 30px;
-        border-radius: 3px;
-        input {
-            width: 220px;
-            padding: 8px 10px;
+    .form {
+        .btns {
+            margin-top: 20px;
+            .login-btn {
+                width: 50%;
+            }
+            .register-btn {
+                width: 26%;
+                background-color: $standard-orange;
+            }
         }
-        .title {
-            font-size: 18px;
-        }
-        .item {
-            margin-bottom: 10px;
-        }
-        .login-btn {
-            width: 132px;
-        }
-        .register-btn {
-            width: 50px;
-            background-color: $standard-orange;
-        }
+    }
+    .footer {
+        margin-top: 30px;
+        color: $standard-white;
     }
 }

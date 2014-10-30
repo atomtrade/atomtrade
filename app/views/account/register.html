@@ -1,66 +1,62 @@
 <div wd-header></div>
 <div class="wd-account-register wd-body">
-    <div class="h2-title" ng-class="{hide: loading}">
+    <div class="h2-title" ng-if="!register.uiSuccess">
         <p>注册账号</p>
     </div>
-    <div ng-if="!register.uiSuccess" class="form" ng-class="{hide: loading}">
-        <div class="item">
-            <p class="title">手机号码</p>
-            <input type="text" ng-model="register.phone" 
-            ng-focus="focusPhone();"
-            ng-blur="blurPhone()">
-            <div class="form-item-tips" 
-            ng-class="{
-                hide: !register.uiPhoneTip && !register.uiPhoneError,
-                error: register.uiPhoneError
-            }">
-                <p>{{register.uiPhoneTip || register.uiPhoneError}}</p>
-            </div>
+    <div class="form" ng-if="!register.uiSuccess" >
+        <input type="text" 
+        ng-model="register.phone" 
+        ng-focus="focusPhone();"
+        ng-blur="blurPhone()"
+        placeholder="手机号码">
+        <div class="form-item-tips" 
+        ng-class="{
+            hide: !register.uiPhoneTip && !register.uiPhoneError,
+            error: register.uiPhoneError
+        }">
+            <p>{{register.uiPhoneTip || register.uiPhoneError}}</p>
         </div>
         <div class="item">
-            <p class="title">短信验证码</p>
             <input class="auth-code-input" type="text" 
             ng-model="register.verify_code" 
             ng-focus="focusVerifyCode();"
-            ng-blur="blurVerifyCode();">
+            ng-blur="blurVerifyCode();"
+            placeholder="短信验证码">
             <div class="btn auth-code-btn">
                 <p ng-if="!register.uiCountdown" ng-click="verifyPhone();">获取验证码</p>
                 <p ng-if="register.uiCountdown">{{register.uiCountdown}} 秒</p>
             </div>
-            <div class="form-item-tips" 
-            ng-class="{
-                hide: !register.uiVerifyCodeTip && !register.uiVerifyCodeError,
-                error: register.uiVerifyCodeError
-            }">
-                <p>{{register.uiVerifyCodeTip || register.uiVerifyCodeError}}</p>
-            </div>
         </div>
-        <div class="item">
-            <p class="title">设置登录密码</p>
-            <input type="text" ng-model="register.password" 
-            ng-focus="focusPassword();"
-            ng-blur="blurPassword();">
-            <div class="form-item-tips" 
-            ng-class="{
-                hide: !register.uiPasswordTip && !register.uiPasswordError,
-                error: register.uiPasswordError
-            }">
-                <p>{{register.uiPasswordTip || register.uiPasswordError}}</p>
-            </div>
+        <div class="form-item-tips" 
+        ng-class="{
+            hide: !register.uiVerifyCodeTip && !register.uiVerifyCodeError,
+            error: register.uiVerifyCodeError
+        }">
+            <p>{{register.uiVerifyCodeTip || register.uiVerifyCodeError}}</p>
         </div>
-        <div class="item">
-            <p class="title">邀请码</p>
-            <input type="text" wd-placeholder="可选填" 
-            ng-model="register.invite_code" 
-            ng-focus="focusInviteCode();"
-            ng-blur="blurInviteCode();">
-            <div class="form-item-tips" 
-            ng-class="{
-                hide: !register.uiInviteCodeTip && !register.uiInviteCodeError,
-                error: register.uiInviteCodeError
-            }">
-                <p>{{register.uiInviteCodeTip || register.uiInviteCodeError}}</p>
-            </div>
+        <input type="text" ng-model="register.password" 
+        ng-focus="focusPassword();"
+        ng-blur="blurPassword();"
+        placeholder="设置登录密码">
+        <div class="form-item-tips" 
+        ng-class="{
+            hide: !register.uiPasswordTip && !register.uiPasswordError,
+            error: register.uiPasswordError
+        }">
+            <p>{{register.uiPasswordTip || register.uiPasswordError}}</p>
+        </div>
+        <p class="title"></p>
+        <input type="text" wd-placeholder="可选填" 
+        ng-model="register.invite_code" 
+        ng-focus="focusInviteCode();"
+        ng-blur="blurInviteCode();"
+        placeholder="邀请码">
+        <div class="form-item-tips" 
+        ng-class="{
+            hide: !register.uiInviteCodeTip && !register.uiInviteCodeError,
+            error: register.uiInviteCodeError
+        }">
+            <p>{{register.uiInviteCodeTip || register.uiInviteCodeError}}</p>
         </div>
         <div class="btn register-btn" ng-click="registerAccount();">立即注册</div>
         <div class="ask">
@@ -72,7 +68,9 @@
         </div>
     </div>
     <div ng-if="register.uiSuccess" class="success">
-        <p class="title">注册成功，你现在开通股票账户即可获得<span class="strong">三个月免费交易</span>。</p>
+        <p class="title">注册成功</p>
+        <p>你现在开通股票账户</p>
+        <p>即可获得<span class="strong">三个月免费交易</span></p>
         <a href="#/account-open" class="btn">立即开户</a>
     </div>
     <div ng-if="loading" wd-loading></div>
