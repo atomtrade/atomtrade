@@ -25,6 +25,9 @@ $routeProvider
         templateUrl: 'views/account/open.html',
         controller: 'openAccountCtrl'
     })
+    .when('/my-index', {
+        templateUrl: 'views/my/my-index.html'
+    })
     .otherwise({
         redirectTo: '/account-login'
     });
