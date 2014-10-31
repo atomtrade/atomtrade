@@ -42,6 +42,9 @@ $routeProvider
     .when('/about-contact', {
         templateUrl: 'views/about/contact.html'
     })
+    .when('/about-money', {
+        templateUrl: 'views/about/money.html'
+    })
     .when('/my-index', {
         templateUrl: 'views/my/index.html'
     })

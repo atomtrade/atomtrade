@@ -20,6 +20,9 @@ return {
             case '/about-contact':
                 btns.eq(2).addClass('active');
             break;
+            case '/about-money':
+                btns.eq(3).addClass('active');
+            break;
         }
     }
 };
