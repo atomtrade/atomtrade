@@ -50,6 +50,10 @@ $routeProvider
         templateUrl: 'views/my/index.html',
         controller: 'myCtrl'
     })
+    .when('/my-change-password', {
+        templateUrl: 'views/my/change-password.html',
+        controller: 'myChangePasswordCtrl'
+    })
     .when('/my-money-in', {
         templateUrl: 'views/my/money-in.html',
         controller: 'myCtrl'

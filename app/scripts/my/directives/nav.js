@@ -14,11 +14,14 @@ return {
             case '/my-index':
                 btns.eq(0).addClass('active');
             break;
-            case '/my-money-in':
+            case '/my-change-password':
                 btns.eq(1).addClass('active');
             break;
-            case '/my-money-out':
+            case '/my-money-in':
                 btns.eq(2).addClass('active');
+            break;
+            case '/my-money-out':
+                btns.eq(3).addClass('active');
             break;
         }
     }

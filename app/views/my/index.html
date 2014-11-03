@@ -4,16 +4,16 @@
     <div ng-if="!loading" class="wd-my-body">
         <p class="h2-title">账户首页</p>
         <div class="item">
-            <p class="title">手机号码：</p>
-            <p>18210235548</p>
+            <p class="title"><span class="icon-mobile"></span>手机号码：</p>
+            <p>{{userInfo.phone}}</p>
         </div>
         <div class="item">
-            <p class="strong">HKD 港币：</p>
-            <p class="strong num">HK$12312</p>
+            <p class="title"><span class="icon-hk"></span>HKD 港币：</p>
+            <p class="strong num">HK${{userInfo.hkCash}}</p>
         </div>
         <div class="item">
-            <p class="strong">USD 美元：</p>
-            <p class="strong num">$12312</p>
+            <p class="title"><span class="icon-us"></span>USD 美元：</p>
+            <p class="strong num">${{userInfo.usCash}}</p>
         </div>
     </div>
     <div ng-if="loading" wd-loading></div>

@@ -81,6 +81,9 @@
             .icon-android {
                 @include wd-image('icon-android.png');
             }
+            .icon-pdf {
+                @include wd-image('icon-pdf.png');
+            }
         }
     }
 }

@@ -15,4 +15,8 @@
     table {
         margin-bottom: 50px;
     }
+    .logo {
+        @include wd-image('logo.png');
+        background-color: $standard-black;
+    }
 }
