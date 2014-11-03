@@ -2,8 +2,9 @@
 
 angular.module('atomApp')
 .controller('registerCtrl', 
-['$scope', 'wdAccount', '$timeout', 'wdConfig', 'wdStorage', '$location', '$interval',
-function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval) {
+['$scope', 'wdAccount', '$timeout', 'wdConfig', 'wdStorage', '$location', '$interval', '$window',
+function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval, $window) {
+    var verifyCodeTime = 60;
     $scope.loading = false;
     $scope.register = {
         phone: '',
@@ -17,6 +18,7 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         uiPhoneError: '',
         uiVerifyCodeError: '',
         uiPasswordError: '',
+        uiServerError: '',
         uiInviteCodeError: '',
         uiCountdown: 0,
         uiSuccess: false
@@ -62,6 +64,9 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         } else if (/\D/g.test($scope.register.phone)) {
             $scope.register.uiPhoneError = '手机号不能非数字字符';
             return false;
+        } else if ($scope.register.phone.length !== 11) {
+            $scope.register.uiPhoneError = '手机号码位数不对';
+            return false;
         } else {
             $scope.register.uiPhoneError = '';
             return true;
@@ -98,7 +103,7 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
     };
 
     $scope.startCountdown = function() {
-        $scope.register.uiCountdown = 30;
+        $scope.register.uiCountdown = verifyCodeTime;
         var t = $interval(function() {
             $scope.register.uiCountdown --;
             if (!$scope.register.uiCountdown) {
@@ -108,24 +113,28 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
     };
 
     $scope.verifyPhone = function() {
-        $scope.startCountdown();
-        return wdAccount.verifyPhone($scope.register.phone);
+        if ($scope.checkPhone()) {
+            $scope.startCountdown();
+            wdAccount.verifyPhone($scope.register.phone);
+        }
     };
 
     $scope.registerAccount = function() {
-        $scope.loading = true;
-        $timeout(function() {
-            $scope.loading = false;
-            $scope.register.uiSuccess = true;
-        }, 2000);
-        wdAccount.register($scope.register).then(function(data) {
-            $scope.register.uiSuccess = true;
-            $scope.loading = false;
-        }, function(data) {
-            console.log(data);
-        });
+        if ($scope.checkPhone() && $scope.checkVerifyCode() && $scope.checkPassword()) {
+            $scope.loading = true;
+            wdAccount.register($scope.register).then(function(data) {
+                $scope.loading = false;
+                if (data.is_succ) {
+                    $scope.register.uiSuccess = true;
+                } else {
+                    $scope.register.uiSuccess = false;
+                    $scope.register.uiServerError = data.error_msg;
+                }
+            });
+        }
     };
 
+    // 监听上传状态
     // $scope.$on('wd-upload-form-success', function(e, data) {
     //     switch(data.face) {
     //         case 'front':
@@ -174,222 +183,5 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
     //         break;
     //     }
     // });
-
-
-/*
-    $scope.step = Number(wdStorage.item('register-step')) || 1;
-    $scope.loading = true;
-    $scope.uploadUrl = wdConfig.apiUrl + '/upload';
-    $scope.signIn = {
-        phone: '',
-        verify_code: '',
-        password: '',
-        uiPhoneError: '',
-        uiVerifyCodeError: '',
-        uiPasswordError: '',
-        uiInviteCodeError: ''
-    };
-
-    $scope.person = {
-        real_name: '',
-        id_no: '',
-        email: '',
-        address: '',
-        invite_code: '',
-        qq: '',
-        uiRealNameError: '',
-        uiIdNoError: '',
-        uiEmailError: '',
-        uiAddressError: '',
-        uiInvitePhoneError: '',
-        uiQQError: '',
-        // 上传状态：0、未上传；1、上传中，2、上传成功；3、上传失败；
-        uiFrontImageStatus: 0,
-        uiBackImageStatus: 0,
-        uiFrontImageError: '',
-        uiBackImageError: ''
-    };
-
-    $scope.goToRegister = function() {
-        if (checkPhone() && checkPassword()) {
-            verifyPhone().then(function(data) {
-                if (data.is_succ) {
-                    savePassword();
-                    savePhone();
-                    $location.path('/register');
-                } else {
-                    $scope.signIn.uiPhoneError = data.error_msg;
-                }
-            });
-        }
-    };
-
-    function goToIndex() {
-        $location.path('/index');
-    }
-
-    function savePhone() {
-        wdStorage.item('phone', $scope.signIn.phone);
-    }
-
-    function getPhone() {
-        $scope.signIn.phone = wdStorage.item('phone');
-        wdStorage.remove('phone');
-    }
-
-    function savePassword() {
-        wdStorage.item('password', $scope.signIn.password);
-    }
-
-    function getPassword() {
-        $scope.signIn.password = wdStorage.item('password');
-        wdStorage.remove('password');
-    }
-    $scope.verifyPhone = function() {
-        if (checkPhone()) {
-            verifyPhone();
-        } else {
-            goToIndex();
-        }
-    };
-
-
-
-    function checkRealName() {
-        if (!$scope.person.real_name) {
-            $scope.person.uiRealNameError = '真实姓名不能为空';
-            return false;
-        } else {
-            $scope.person.uiRealNameError = '';
-            return true;
-        }
-    }
-
-    function checkIdNo() {
-        if (!$scope.person.id_no) {
-            $scope.person.uiIdNoError = '请填写身份证号码';
-            return false;
-        } else {
-            $scope.person.uiIdNoError = '';
-            return true;
-        }
-    }
-
-    function checkEmail() {
-        if (!$scope.person.email) {
-            $scope.person.uiEmailError = '请填写电子邮件地址';
-            return false;
-        } else {
-            $scope.person.uiEmailError = '';
-            return true;
-        }
-    }
-
-    function checkQQ() {
-        if (!$scope.person.qq) {
-            $scope.person.uiQQError = '请填写 QQ 号码';
-            return false;
-        } else {
-            $scope.person.uiQQError = '';
-            return true;
-        }
-    }
-
-    function setInfo() {
-        return wdAccount.setInfo($scope.person);
-    }
-
-    $scope.nextStep = function() {
-        switch ($scope.step) {
-            case 1:
-                if (checkVerifyCode()) {
-                    register();
-                    nextStep();
-                } else {
-                    return false;
-                }
-            break;
-            case 2:
-                if (checkRealName() && checkIdNo() && checkEmail() && checkQQ()) {
-                    setInfo().then(function(data) {
-                        if (data.is_succ) {
-                            nextStep();
-                        } else {
-                            $scope.person.uiIdNoError = data.error_msg;
-                        }
-                    });
-                } else {
-                    return false;
-                }          
-            break;
-            case 3:
-                nextStep();
-            break;
-            case 4:
-                goToMoney();
-            break;
-            default:
-                nextStep();
-            break;
-        }
-    };
-
-    $scope.goToStep = function(step) {
-        $scope.step = step;
-        wdStorage.item('register-step', step);
-    };
-
-    function nextStep() {
-        $scope.step ++;
-        $scope.goToStep($scope.step);
-    }
-
-    $scope.keyDown = function(e) {
-        switch($location.path()) {
-            case '/index':
-                if (e.keyCode === 13) {
-                    $scope.goToRegister();
-                }
-            break;
-            case '/register':
-                if (e.keyCode === 13) {
-                    $scope.nextStep();
-                }            
-            break;
-        }
-    };
-
-    function goToMoney() {
-        $location.path('/money');
-    }
-
-
-
-    // 进入时的逻辑
-    wdAccount.check().then(function(data) {
-        if (wdStorage.item('is_set_info')) {
-            $scope.step = 3;
-        }
-        if (wdStorage.item('is_set_id_pic')) {
-            $scope.step = 4;
-        }
-        if (data.is_succ) {
-            $scope.loading = false;
-            // 已经完成注册申请过程
-            if ($scope.step === 4) {
-                $location.path('/money');
-            } else {
-                $location.path('/register');
-                if ($scope.step < 2) {
-                    $scope.goToStep(2);
-                }
-            }
-        } else {
-            $scope.loading = false;
-        }
-    }, function(data) {
-        $scope.loading = false;
-    });
-*/
 
 }]);

@@ -1,8 +1,9 @@
 .wd-download {
+    min-width: $min-page-width;
     background-color: $standard-gray;
     .banner {
         height: 300px;
-        @include wd-image('index-banner.jpg');
+        @include wd-image('download-banner.jpg');
         width: 100%;
     }
     .intro-info {

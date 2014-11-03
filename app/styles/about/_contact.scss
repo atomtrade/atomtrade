@@ -1,6 +1,7 @@
 .wd-about-contact {
     .map {
         @include wd-image('location.png');
+        width: 680px;
     }
     .contact-btn {
         margin-bottom: 30px;

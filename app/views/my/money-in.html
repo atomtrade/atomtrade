@@ -1,0 +1,31 @@
+<div wd-header></div>
+<div class="wd-my-money-in wd-body">
+    <div ng-if="!loading" wd-my-nav></div>
+    <div ng-if="!loading" class="wd-my-body">
+        <p class="h2-title">存入资金</p>
+        <div class="item">
+            <p class="title">证券类别</p>
+            <div class="tab active">港股</div>
+            <div class="tab">美股</div>
+        </div>
+        <div class="item">
+            <p class="title">汇款币种</p>
+            <div class="tab active">港币</div>
+            <div class="tab">美元</div>
+        </div>
+        <div class="item">
+            <div class="tab-body">alkjslafjlaslsflas</div>
+            <div class="tab-body hide">safkjslakjflslaf</div>
+        </div>
+        <div class="item">
+            <p class="title">存入金额<span>（港币）</span></p>
+            <input type="text">
+        </div>
+        <div class="item">
+            <p class="title">备注</p>
+            <input type="text">
+        </div>        
+    </div>
+    <div ng-if="loading" wd-loading></div>
+</div>
+<div wd-footer></div>

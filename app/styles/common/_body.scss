@@ -11,4 +11,12 @@
             font-size: 23px;
         }
     }
+    .item {
+        p {
+            display: inline-block;
+            &.title {
+                font-size: 18px;
+            }
+        }
+    }
 }

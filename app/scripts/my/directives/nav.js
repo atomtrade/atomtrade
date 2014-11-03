@@ -10,14 +10,17 @@ return {
     scope: true,
     link: function(scope, element, attributes) {
         var btns = element.find('.item').find('a').removeClass('active');
-        // switch ($location.path()) {
-        //     case '/about-company':
-        //         btns.eq(0).addClass('active');
-        //     break;
-        //     case '/about-license':
-        //         btns.eq(1).addClass('active');
-        //     break;
-        // }
+        switch ($location.path()) {
+            case '/my-index':
+                btns.eq(0).addClass('active');
+            break;
+            case '/my-money-in':
+                btns.eq(1).addClass('active');
+            break;
+            case '/my-money-out':
+                btns.eq(2).addClass('active');
+            break;
+        }
     }
 };
 }]);

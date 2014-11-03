@@ -61,6 +61,7 @@
             }">
                 <p>{{register.uiInviteCodeTip || register.uiInviteCodeError}}</p>
             </div>
+            <p class="error">{{register.uiServerError}}</p>
         </div>
         <div class="btn register-btn" ng-click="registerAccount();">立即注册</div>
         <div class="ask">
@@ -72,6 +73,7 @@
         </div>
     </div>
     <div ng-if="register.uiSuccess" class="success">
+        <div class="icon-right"></div>
         <p class="title">注册成功，你现在开通股票账户即可获得<span class="strong">三个月免费交易</span>。</p>
         <a href="#/account-open" class="btn">立即开户</a>
     </div>

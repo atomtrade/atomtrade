@@ -1,4 +1,5 @@
 .wd-index {
+    min-width: $min-page-width;
     background-color: $standard-gray;
     .banner {
         height: 300px;

@@ -10,8 +10,9 @@
  */
 angular
 .module('atomApp', 
-['ngCookies', 'ngResource', 'ngRoute', 'ngSanitize'])
-.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+['ngCookies', 'ngResource', 'ngRoute', 'ngSanitize', 'ngAnimate'])
+.config(['$routeProvider', '$httpProvider', 
+function ($routeProvider, $httpProvider) {
 $routeProvider
     .when('/index', {
         templateUrl: 'views/index/index.html',
@@ -46,7 +47,16 @@ $routeProvider
         templateUrl: 'views/about/money.html'
     })
     .when('/my-index', {
-        templateUrl: 'views/my/index.html'
+        templateUrl: 'views/my/index.html',
+        controller: 'myCtrl'
+    })
+    .when('/my-money-in', {
+        templateUrl: 'views/my/money-in.html',
+        controller: 'myCtrl'
+    })
+    .when('/my-money-out', {
+        templateUrl: 'views/my/money-out.html',
+        controller: 'myCtrl'
     })
     .otherwise({
         redirectTo: '/index'
