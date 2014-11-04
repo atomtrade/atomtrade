@@ -16,11 +16,13 @@ function ($scope, wdAccount, $location) {
             $location.path('/account-login');
         }
     }).then(function(data) {
-        $scope.userInfo = {
-            phone: data.phone,
-            usCash: data.usstock_cash,
-            hkCash: data.hkstock_cash
-        };
+        if (data && data.is_succ) {
+            $scope.userInfo = {
+                phone: data.phone,
+                usCash: data.usstock_cash,
+                hkCash: data.hkstock_cash
+            };
+        }
         $scope.loading = false;
     });
 }]);

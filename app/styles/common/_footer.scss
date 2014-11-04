@@ -5,7 +5,7 @@
     background-color: $standard-black;
     color: $standard-white;
     p, a {
-        color: #7E8BA0;
+        color: #7D8185;
         &.title {
             font-size: 18px;
             margin-bottom: 10px;
@@ -15,6 +15,7 @@
     .block {
         width: 150px;
         p, a {
+            line-height: 24px;
             display: block;
             width: 100%;
         }
@@ -33,33 +34,40 @@
         right: 40px;
         text-align: center;
         .title {
-            font-size: 20px;
+            font-size: 22px;
             .icon-phone {
                 @include wd-image('icon-phone.png');
                 margin-bottom: -8px;
                 margin-right: 4px;
             }
         }
+        p {
+            font-size: 12px;
+        }
     }
     .bottom-tips {
         border-top: 1px solid #333;
         position: absolute;
         bottom: 0px;
-        padding: 5px 0px 10px 0px;
+        padding: 8px 0px 10px 0px;
         width: 100%;
         text-align: center;
+        a, p {
+            font-size: 12px;
+        }
     }
     .online-btn {
-        width: 170px;
+        width: 175px;
         margin-top: 10px;
-        line-height: 40px;
-        height: 40px;
+        line-height: 30px;
+        height: 30px;
         border-radius: 3px;
         color: $standard-white;
         font-size: 20px;
         .icon-sms {
             @include wd-image('icon-sms.png');
             margin-right: 10px;
+            margin-top: -6px;
         }
     }
 }

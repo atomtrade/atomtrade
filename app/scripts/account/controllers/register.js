@@ -2,8 +2,8 @@
 
 angular.module('atomApp')
 .controller('registerCtrl', 
-['$scope', 'wdAccount', '$timeout', 'wdConfig', 'wdStorage', '$location', '$interval', '$window',
-function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval, $window) {
+['$scope', 'wdAccount', '$timeout', 'wdConfig', 'wdStorage', '$location', '$interval', '$window', 'wdCheck',
+function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval, $window, wdCheck) {
     var verifyCodeTime = 60;
     $scope.loading = false;
     $scope.register = {
@@ -58,47 +58,35 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
     };
 
     $scope.checkPhone = function() {
-        if (!$scope.register.phone) {
-            $scope.register.uiPhoneError = '手机号不能为空';
-            return false;
-        } else if (/\D/g.test($scope.register.phone)) {
-            $scope.register.uiPhoneError = '手机号不能非数字字符';
-            return false;
-        } else if ($scope.register.phone.length !== 11) {
-            $scope.register.uiPhoneError = '手机号码位数不对';
-            return false;
-        } else {
+        var res = wdCheck.checkPhone($scope.register.phone);
+        if (!res) {
             $scope.register.uiPhoneError = '';
             return true;
+        } else {
+            $scope.register.uiPhoneError = res;
+            return false;
         }
     };
 
     $scope.checkVerifyCode = function() {
-        if (!$scope.register.verify_code) {
-            $scope.register.uiVerifyCodeError = '验证码不能为空';
-            return false;
-        } else {
+        var res = wdCheck.checkVerifyCode($scope.register.verify_code);
+        if (!res) {
             $scope.register.uiVerifyCodeError = '';
             return true;
+        } else {
+            $scope.register.uiVerifyCodeError = res;
+            return false;
         }
     };
 
     $scope.checkPassword = function() {
-        if (!$scope.register.password) {
-            $scope.register.uiPasswordError = '密码不能为空';
-            return false;
-        } else if (!/\D/.test($scope.register.password)) {
-            $scope.register.uiPasswordError = '密码不能为纯数字';
-            return false;
-        } else if (!/[^A-Za-z]/.test($scope.register.password)) {
-            $scope.register.uiPasswordError = '密码不能为纯字母';
-            return false;
-        } else if ($scope.register.password.length < 6) {
-            $scope.register.uiPasswordError = '密码不能小于 6 位';
-            return false;
-        } else {
+        var res = wdCheck.checkPassword($scope.register.password);
+        if (!res) {
             $scope.register.uiPasswordError = '';
             return true;
+        } else {
+            $scope.register.uiPasswordError = res;
+            return false;
         }
     };
 

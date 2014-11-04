@@ -3,7 +3,7 @@ $standard-deep-black: #000000;
 $standard-black: #282828;
 $standard-light-black: #313131;
 $standard-white: #ffffff;
-$standard-blue: #0A5ECC;
+$standard-blue: #2890e0;
 $standard-light-blue: #0086FF;
 $standard-deep-blue: #1C5095;
 $standard-orange: #FE7325;
@@ -13,7 +13,7 @@ $standard-red: #ed7161;
 $standard-light-red: #FDE3E3;
 $standard-deep-orange: #faaf46;
 $standard-blue-green: #74aac5;
-$standard-green: #31A501;
+$standard-green: #5c9c02;
 
 $page-width: 80%;
 $min-page-width: 960px; 
@@ -59,6 +59,7 @@ p {
 }
 
 input[type=text], input[type=password] {
+    border-radius: 2px;
     display: inline-block;
     padding: 5px 5px;
     border: 1px solid $standard-deep-gray;
@@ -92,6 +93,7 @@ select {
 }
 
 .btn {
+    border-radius: 2px;
     display: inline-block;
     background-color: $standard-blue;
     color: $standard-white;

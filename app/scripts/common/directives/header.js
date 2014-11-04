@@ -38,7 +38,7 @@ return {
             wdAccount.logout().then(function(data) {
                 $scope.loading = false;
                 if (data.is_succ) {
-                    $window.location.reload();
+                    $location.path('/index');
                 }
             });
         };

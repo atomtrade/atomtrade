@@ -66,6 +66,19 @@ function($rootScope, $http, wdStorage, $q) {
         },
         setRisk: function(opts) {
             return $http.post('/risk', opts);
+        },
+        changePassword: function(opts) {
+            return $http.post('/change_password', opts);
+        },
+        verifyPasswordPhone: function(num) {
+            return $http.get('/find_password', {
+                params: {
+                    phone: String(num)
+                }
+            });
+        },
+        findPassword: function(opts) {
+            return $http.post('/find_password', opts);
         }
     };
     // 结束 
