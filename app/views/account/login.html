@@ -1,29 +1,31 @@
 <div wd-header></div>
 <div class="wd-account-login" ng-keyDown="keyDown($event)">
     <div class="banner"></div>
-    <div ng-if="!loading" class="login-form">
-        <div class="item">
-            <p class="title">使用手机号码登录</p>
+    <div class="wd-wrapper">
+        <div ng-if="!loading" class="login-form">
+            <div class="item">
+                <p class="title">使用手机号码登录</p>
+            </div>
+            <div class="item">
+                <input ng-class="{error: user.uiPhoneError}" type="text" wd-placeholder="手机号码" ng-model="user.phone">
+            </div>
+            <div class="item">
+                <input ng-class="{error: user.uiPasswordError}" type="password" wd-placeholder="登录密码" ng-model="user.password">
+            </div>
+            <div class="item">
+                <p class="error">{{user.uiPhoneError || user.uiPasswordError || user.uiServerError}}</p>
+            </div>
+            <div class="item">
+                <a class="btn login-btn" ng-click="login();">登录</a>
+                <a href="#/account-register" class="btn register-btn">注册</a>
+            </div>
+            <div class="item">
+                <a href="#/my-change-password">忘记密码？</a>
+            </div>
         </div>
-        <div class="item">
-            <input ng-class="{error: user.uiPhoneError}" type="text" wd-placeholder="手机号码" ng-model="user.phone">
+        <div ng-if="loading" class="login-form">
+            <div wd-loading></div>
         </div>
-        <div class="item">
-            <input ng-class="{error: user.uiPasswordError}" type="password" wd-placeholder="登录密码" ng-model="user.password">
-        </div>
-        <div class="item">
-            <p class="error">{{user.uiPhoneError || user.uiPasswordError || user.uiServerError}}</p>
-        </div>
-        <div class="item">
-            <a class="btn login-btn" ng-click="login();">登录</a>
-            <a href="#/account-register" class="btn register-btn">注册</a>
-        </div>
-        <div class="item">
-            <a href="#/my-change-password">忘记密码？</a>
-        </div>
-    </div>
-    <div ng-if="loading" class="login-form">
-        <div wd-loading></div>
     </div>
 </div>
 <div wd-footer></div>

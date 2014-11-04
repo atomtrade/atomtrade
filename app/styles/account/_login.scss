@@ -1,6 +1,9 @@
 .wd-account-login {
     min-width: $min-page-width;
     position: relative;
+    .wd-wrapper {
+        top: -670px;
+    }
     .banner {
         @include wd-image('login-banner.jpg');
         width: 100%;
@@ -11,7 +14,7 @@
         width: 303px;
         background-color: $standard-white;
         position: absolute;
-        top: 15%;
+        top: 140px;
         right: 5%;
         padding: 30px 32px 25px 27px;
         border-radius: 2px;
