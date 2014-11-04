@@ -3,7 +3,7 @@ angular.module('atomApp')
 .controller('myChangePasswordCtrl', 
 ['$scope', 'wdAccount', '$location', 'wdCheck', '$interval',
 function ($scope, wdAccount, $location, wdCheck, $interval) {
-    $scope.loading = false;
+    $scope.loading = true;
     $scope.isLogin = false;
     var verifyCodeTime = 60;
     wdAccount.check().then(function(data) {

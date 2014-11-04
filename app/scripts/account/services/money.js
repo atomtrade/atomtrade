@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('atomApp')
-.factory('wdAccountMoney', 
+.factory('wdMoney', 
 ['$window', '$location', 'wdConfig', '$http',
 function($window, $location, wdConfig, $http) {
     var equitySocketUrl = wdConfig.webSocketUrl + '/equity';
@@ -18,8 +18,13 @@ function($window, $location, wdConfig, $http) {
                 return equitySocket;
             }
         },
-        pay: function(money) {
-            $window.open(wdConfig.apiUrl + '/pay?amount=' + money);
+        deposit: function(opts) {
+            opts.amount = Number(opts.amount);
+            return $http.post('/deposit', opts);
+        },
+        withdrawal: function(opts) {
+            opts.amount = Number(opts.amount);
+            return $http.post('/withdrawal', opts);
         }
     };
 // 结束

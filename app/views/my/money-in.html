@@ -1,30 +1,76 @@
 <div wd-header></div>
-<div class="wd-my-money-in wd-body">
+<div class="wd-my-money wd-body">
     <div ng-if="!loading" wd-my-nav></div>
-    <div ng-if="!loading" class="wd-my-body">
+    <div ng-if="!loading && !money.uiSuccess" class="wd-my-body">
         <p class="h2-title">存入资金</p>
         <div class="item">
             <p class="title">证券类别</p>
-            <div class="tab active">港股</div>
-            <div class="tab">美股</div>
+            <div class="tab" 
+            ng-click="money.stock_category = 'hkstock';"
+            ng-class="{active: money.stock_category === 'hkstock'}">港股</div>
+            <div class="tab" 
+            ng-click="money.stock_category = 'usstock';"
+            ng-class="{active: money.stock_category === 'usstock'}">美股</div>
         </div>
         <div class="item">
             <p class="title">汇款币种</p>
-            <div class="tab active">港币</div>
-            <div class="tab">美元</div>
+            <div class="tab" 
+            ng-click="money.currency = 'hkd';"
+            ng-class="{active: money.currency === 'hkd'}">港币</div>
+            <div class="tab" 
+            ng-click="money.currency = 'usd';"
+            ng-class="{active: money.currency === 'usd'}">美元</div>
         </div>
         <div class="item">
-            <div class="tab-body">alkjslafjlaslsflas</div>
-            <div class="tab-body hide">safkjslakjflslaf</div>
+            <!-- 港币 -->
+            <div ng-if="money.currency === 'hkd'" class="tab-body">
+                <p><span class="title-name">中国工商银行（亚洲）有限公司</span></p>
+                <p><span class="title">入资银行账号：</span><span class="strong">861-504-15355-3</span></p>
+                <p><span class="title">电汇代码：</span><span class="strong">UBHKHKHH XXX</span></p>
+                <p><span class="title">说明：</span>XXX 就是电汇代码的一部分，不替换为任何其他字符）</p>
+            </div>
+            <div ng-if="money.currency === 'hkd'" class="tab-body">
+                <p><span class="title-name">中国银行（香港）有限公司</span></p>
+                <p><span class="title">入资银行账号：</span><span class="strong">012-875-0-050474-2</span></p>
+                <p><span class="title">电汇代码：</span><span class="strong">BKCHHKHH XXX</span></p>
+                <p><span class="title">说明：</span>XXX 就是电汇代码的一部分，不替换为任何其他字符）</p>
+            </div>
+            <!-- 港币 end -->
+            <!-- 美元 -->
+            <div ng-if="money.currency === 'usd'" class="tab-body">
+                <p><span class="title-name">中国工商银行（亚洲）有限公司</span></p>
+                <p><span class="title">入资银行账号：</span><span class="strong">861-506-26189-6</span></p>
+                <p><span class="title">电汇代码：</span><span class="strong">UBHKHKHH XXX</span></p>
+                <p><span class="title">说明：</span>XXX 就是电汇代码的一部分，不替换为任何其他字符）</p>
+            </div>
+            <div ng-if="money.currency === 'usd'" class="tab-body">
+                <p><span class="title-name">中国银行（香港）有限公司</span></p>
+                <p><span class="title">入资银行账号：</span><span class="strong">012-875-0-804039-0</span></p>
+                <p><span class="title">电汇代码：</span><span class="strong">BKCHHKHH XXX</span></p>
+                <p><span class="title">说明：</span>XXX 就是电汇代码的一部分，不替换为任何其他字符）</p>
+            </div>
+            <!-- 美元 end -->
         </div>
         <div class="item">
             <p class="title">存入金额<span>（港币）</span></p>
-            <input type="text">
+            <input type="text" ng-model="money.amount" ng-blur="checkAmount()">
+            <p class="error">{{money.uiAmountError}}</p>
         </div>
         <div class="item">
             <p class="title">备注</p>
-            <input type="text">
-        </div>        
+            <input type="text" ng-model="money.note">
+        </div>
+        <div class="item">
+            <div class="btn submit-btn" ng-click="deposit()">提交</div>
+        </div>      
+    </div>
+    <div class="wd-my-body" ng-if="!loading && money.uiSuccess">
+        <div class="item">
+            <p class="strong success-tip">提交成功！</p>
+        </div>
+        <div class="item">
+            <p class="btn" ng-click="reset();">再次入金</p>
+        </div>  
     </div>
     <div ng-if="loading" wd-loading></div>
 </div>

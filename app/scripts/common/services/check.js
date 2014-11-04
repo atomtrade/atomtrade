@@ -65,6 +65,15 @@ function($rootScope) {
             } else {
                 return false;
             }
+        },
+        checkAmount: function(amount) {
+            if (/[^\d|\.]/.test(amount)) {
+                return '请填写数字';
+            } else if (!amount) {
+                return '请填写金额';
+            } else {
+                return false;
+            }
         }
     };
     // 结束 

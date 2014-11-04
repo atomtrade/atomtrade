@@ -56,11 +56,11 @@ $routeProvider
     })
     .when('/my-money-in', {
         templateUrl: 'views/my/money-in.html',
-        controller: 'myCtrl'
+        controller: 'myMoneyInCtrl'
     })
     .when('/my-money-out', {
         templateUrl: 'views/my/money-out.html',
-        controller: 'myCtrl'
+        controller: 'myMoneyOutCtrl'
     })
     .otherwise({
         redirectTo: '/index'

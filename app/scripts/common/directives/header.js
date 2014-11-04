@@ -22,8 +22,10 @@ return {
         if (/\/about/.test(path)) {
             btns.eq(2).addClass('active');
         }
+        
         // 每次打开一个新页面都自动跳转到最上面
         $($window).scrollTop(0);
+
         $scope.isLogin = false;
         $scope.loading = true;
         wdAccount.check().then(function(data) {
@@ -32,7 +34,6 @@ return {
                 $scope.isLogin = true;
             }
         });
-
         $scope.logout = function() {
             $scope.loading = true;
             wdAccount.logout().then(function(data) {
