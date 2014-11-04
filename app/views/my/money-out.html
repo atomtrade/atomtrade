@@ -1,0 +1,67 @@
+<!-- 
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+ -->
+
+<div wd-header></div>
+<div class="wd-my-money wd-body">
+    <div ng-if="!loading" wd-my-nav></div>
+    <div ng-if="!loading && !money.uiSuccess" class="wd-my-body">
+        <p class="h2-title">提取资金</p>
+        <div class="item">
+            <p class="title">提取账户</p>
+            <div class="tab" 
+            ng-click="money.stock_category = 'hkstock';"
+            ng-class="{active: money.stock_category === 'hkstock'}">港股</div>
+            <div class="tab" 
+            ng-click="money.stock_category = 'usstock';"
+            ng-class="{active: money.stock_category === 'usstock'}">美股</div>
+        </div>
+        <div class="item">
+            <p class="title">开户银行</p>
+            <input type="text" ng-model="money.bank_name" 
+            ng-blur="checkBankName()"
+            ng-focus="money.uiBankNameError = '';">
+            <p class="error">{{money.uiBankNameError}}</p>
+        </div>  
+        <div class="item">
+            <p class="title">银行卡号</p>
+            <input type="text" ng-model="money.bank_account" 
+            ng-blur="checkBankAccount()"
+            ng-focus="money.uiBankAccountError = '';">
+            <p>
+                <span class="strong">（仅能够汇款给自己）</span>
+                <span class="error">{{money.uiBankAccountError}}</span>
+            </p>
+        </div> 
+        <div class="item">
+            <p class="title">金额
+                <span ng-if="money.stock_category === 'hkstock'">（港币）</span>
+                <span ng-if="money.stock_category === 'usstock'">（美元）</span>
+            </p>
+            <input type="text" ng-model="money.amount" ng-blur="checkAmount()">
+            <p class="error">{{money.uiAmountError}}</p>
+        </div>  
+        <div class="item">
+            <p class="title">备注：</p>
+            <input type="text" ng-model="money.note">
+        </div>
+        <div class="item">
+            <div class="btn submit-btn" ng-click="withdrawal()">提交</div>
+        </div>
+    </div>
+    <div class="wd-my-body" ng-if="!loading && money.uiSuccess">
+        <div class="item">
+            <p class="strong success-tip">提交成功！</p>
+        </div>
+        <div class="item">
+            <p class="btn" ng-click="reset();">再次入金</p>
+        </div>
+    </div>
+    <div ng-if="loading" wd-loading></div>
+</div>
+<div wd-footer></div>

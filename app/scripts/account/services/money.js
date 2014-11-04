@@ -1,7 +1,14 @@
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+
 'use strict';
 
-angular.module('tigerwitApp')
-.factory('wdAccountMoney', 
+angular.module('atomApp')
+.factory('wdMoney', 
 ['$window', '$location', 'wdConfig', '$http',
 function($window, $location, wdConfig, $http) {
     var equitySocketUrl = wdConfig.webSocketUrl + '/equity';
@@ -18,8 +25,13 @@ function($window, $location, wdConfig, $http) {
                 return equitySocket;
             }
         },
-        pay: function(money) {
-            $window.open(wdConfig.apiUrl + '/pay?amount=' + money);
+        deposit: function(opts) {
+            opts.amount = Number(opts.amount);
+            return $http.post('/deposit', opts);
+        },
+        withdrawal: function(opts) {
+            opts.amount = Number(opts.amount);
+            return $http.post('/withdrawal', opts);
         }
     };
 // 结束

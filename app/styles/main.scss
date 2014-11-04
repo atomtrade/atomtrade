@@ -1,3 +1,10 @@
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+
 @import "compass";
 // bower:scss
 // endbower
@@ -8,10 +15,23 @@
 @import "common/loading";
 @import "common/place-holder";
 @import "common/header";
+@import "common/footer";
 @import "../base/webuploader-0.1.5/webuploader";
+@import "common/body";
+@import "common/wrapper";
+@import "common/ng-animation";
 
-/* account */
-@import "account/index";
-@import "account/login";
+/* others */
+@import "index/index";
+@import "index/download";
 @import "account/register";
-@import "account/money";
+@import "account/login";
+@import "account/open";
+@import "about/nav";
+@import "about/body";
+@import "about/license";
+@import "about/contact";
+@import "my/body";
+@import "my/my-index";
+@import "my/my-change-password";
+@import "my/money";

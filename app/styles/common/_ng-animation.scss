@@ -1,0 +1,42 @@
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+
+/*
+ The animate class is apart of the element and the ng-enter class
+ is attached to the element once the enter animation event is triggered
+*/
+
+/* starting animations for leave */
+.angular-animation.ng-leave {
+    @include opacity(1);
+    @include animation(ngLeave 0.5s);
+}
+
+/* terminal animations for leave */ 
+.angular-animation.ng-leave-active {
+    /* The animation preparation code */
+}
+
+.angular-animation.ng-enter {
+    @include opacity(0.8);
+    @include animation(ngEnter 0.5s);
+}
+
+.angular-animation.ng-enter-active {
+}
+
+@include keyframes (ngEnter) {
+    to {
+        @include opacity(1);
+    }
+}
+@include keyframes (ngLeave) {
+    to {
+        @include opacity(0.8);
+    }
+}
+

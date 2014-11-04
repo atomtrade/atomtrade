@@ -1,43 +1,64 @@
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+
 'use strict';
 
-angular.module('tigerwitApp')
+angular.module('atomApp')
 .controller('loginCtrl', 
-['$scope', 'wdAccount', '$timeout', '$location', 'wdStorage',
-function ($scope, wdAccount, $timeout, $location, wdStorage) {
-    $scope.login = {
+['$scope', 'wdAccount', '$timeout', '$location', 'wdStorage', 'wdCheck',
+function ($scope, wdAccount, $timeout, $location, wdStorage, wdCheck) {
+    $scope.loading = false;
+    $scope.user = {
         phone: '',
         password: '',
-        uiLoginError: ''
+        uiPhoneError: '',
+        uiPasswordError: '',
+        uiServerError: ''
     };
 
-    // 进入时的逻辑
-    // wdAccount.check().then(function(data) {
-    //     if (data.is_succ) {
-    //         $location.path('/index');
-    //     } else {
-    //         $scope.loading = false;
-    //     }
-    // }, function(data) {
-    //     $scope.loading = false;
-    // });
+    function checkPhone() {
+        var res = wdCheck.checkPhone($scope.user.phone);
+        if (!res) {
+            $scope.user.uiPhoneError = '';
+            return true;
+        } else {
+            $scope.user.uiPhoneError = res;
+            return false;
+        }
+    }
 
-    $scope.loginFun = function() {
-        $scope.login.uiLoginError = '';
-        wdAccount.login($scope.login).then(function(data) {
-            if (data.is_succ) {
-                $location.path('/register');
-            } else {
-                $scope.login.uiLoginError = data.error_msg;
-            }
-        }, function(data) {
-            console.log(data);
-            $scope.login.uiLoginError = '登录失败';
-        });
+    function checkPassword() {
+        var res = wdCheck.checkPassword($scope.user.password);
+        if (!res) {
+            $scope.user.uiPasswordError = '';
+            return true;
+        } else {
+            $scope.user.uiPasswordError = res;
+            return false;
+        }
+    }
+
+    $scope.login = function() {
+        if (checkPhone() && checkPassword()) {
+            $scope.loading = true;
+            wdAccount.login($scope.user).then(function(data) {
+                if (data.is_succ) {
+                    $location.path('/my-index');
+                } else {
+                    $scope.loading = false;
+                    $scope.user.uiServerError = data.err_msg;
+                }
+            });
+        }
     };
 
     $scope.keyDown = function(e) {
         if (e.keyCode === 13) {
-            $scope.loginFun();
+            $scope.login();
         }
     };
 }]);

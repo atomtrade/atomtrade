@@ -1,0 +1,30 @@
+<!-- 
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+ -->
+
+<div wd-header></div>
+<div class="wd-my-index wd-body">
+    <div ng-if="!loading" wd-my-nav></div>
+    <div ng-if="!loading" class="wd-my-body">
+        <p class="h2-title">账户首页</p>
+        <div class="item">
+            <p class="title"><span class="icon-mobile"></span>手机号码：</p>
+            <p>{{userInfo.phone}}</p>
+        </div>
+        <div class="item">
+            <p class="title"><span class="icon-hk"></span>HKD 港币：</p>
+            <p class="strong num">HK${{userInfo.hkCash}}</p>
+        </div>
+        <div class="item">
+            <p class="title"><span class="icon-us"></span>USD 美元：</p>
+            <p class="strong num">${{userInfo.usCash}}</p>
+        </div>
+    </div>
+    <div ng-if="loading" wd-loading></div>
+</div>
+<div wd-footer></div>

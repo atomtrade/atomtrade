@@ -1,6 +1,13 @@
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+
 'use strict';
 
-angular.module('tigerwitApp')
+angular.module('atomApp')
 .factory('wdStorage', ['$window', function($window) {
     function get(name) {
         return $window.localStorage.getItem(name);
@@ -26,7 +33,7 @@ angular.module('tigerwitApp')
             remove(name);
         },
         removeAll: function() {
-            var list = ['phone', 'password', 'register-step', 'is_set_info', 'is_set_id_pic'];
+            var list = ['userInfo'];
             $.each(list, function(i, v) {
                 remove(v);
             });

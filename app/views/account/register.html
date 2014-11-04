@@ -1,86 +1,91 @@
-<div class="wd-register" ng-keyDown="keyDown($event);">
-    <div class="header wd-header">
-        <a href="#/" class="logo"></a>
-        <div class="toolbar">
-            <a href="#/login" class="login-btn btn">登录</a>
+<!-- 
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+ -->
+
+<div wd-header></div>
+<div class="wd-account-register wd-body">
+    <div class="h2-title" ng-class="{hide: loading}">
+        <p>注册账号</p>
+    </div>
+    <div ng-if="!register.uiSuccess" class="form" ng-class="{hide: loading}">
+        <div class="item">
+            <p class="title">手机号码</p>
+            <input type="text" ng-model="register.phone" 
+            ng-focus="focusPhone();"
+            ng-blur="blurPhone()">
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !register.uiPhoneTip && !register.uiPhoneError,
+                error: register.uiPhoneError
+            }">
+                <p>{{register.uiPhoneTip || register.uiPhoneError}}</p>
+            </div>
+        </div>
+        <div class="item">
+            <p class="title">短信验证码</p>
+            <input class="auth-code-input" type="text" 
+            ng-model="register.verify_code" 
+            ng-focus="focusVerifyCode();"
+            ng-blur="blurVerifyCode();">
+            <div class="btn auth-code-btn">
+                <p ng-if="!register.uiCountdown" ng-click="verifyPhone();">获取验证码</p>
+                <p ng-if="register.uiCountdown">{{register.uiCountdown}} 秒</p>
+            </div>
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !register.uiVerifyCodeTip && !register.uiVerifyCodeError,
+                error: register.uiVerifyCodeError
+            }">
+                <p>{{register.uiVerifyCodeTip || register.uiVerifyCodeError}}</p>
+            </div>
+        </div>
+        <div class="item">
+            <p class="title">设置登录密码</p>
+            <input type="text" ng-model="register.password" 
+            ng-focus="focusPassword();"
+            ng-blur="blurPassword();">
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !register.uiPasswordTip && !register.uiPasswordError,
+                error: register.uiPasswordError
+            }">
+                <p>{{register.uiPasswordTip || register.uiPasswordError}}</p>
+            </div>
+        </div>
+        <div class="item">
+            <p class="title">邀请码</p>
+            <input type="text" wd-placeholder="可选填" 
+            ng-model="register.invite_code" 
+            ng-focus="focusInviteCode();"
+            ng-blur="blurInviteCode();">
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !register.uiInviteCodeTip && !register.uiInviteCodeError,
+                error: register.uiInviteCodeError
+            }">
+                <p>{{register.uiInviteCodeTip || register.uiInviteCodeError}}</p>
+            </div>
+            <p class="error">{{register.uiServerError}}</p>
+        </div>
+        <div class="btn register-btn" ng-click="registerAccount();">立即注册</div>
+        <div class="ask">
+            <input type="checkbox" checked="checked">
+            <p>同意并遵守
+                <a href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/secret.pdf">隐私声明</a>
+                和
+                <a href="">服务条款</a></p>
         </div>
     </div>
-    <div class="all-form">
-        <div class="item">
-            <div class="item-header">1. 验证手机号</div>
-            <div class="item-body verify-phone" ng-class="{hide: step !== 1}">
-                <input autofocus ng-class="{error: signIn.uiVerifyCodeError}" type="text" wd-place-holder placeholder="短信验证码" ng-model="signIn.verify_code">
-                <a ng-click="verifyPhone();">重新发送</a>
-                <br>
-                <p class="tip" ng-class="{error: signIn.uiVerifyCodeError}">请输入您所收到的短信验证码</p>
-                <br>
-                <div class="btn" ng-click="nextStep();">下一步</div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="item-header" ng-class="{hide: step < 2}">2. 补全个人信息</div>
-            <div class="item-body person-info" ng-class="{hide: step !== 2}">
-                <input ng-class="{error: person.uiRealNameError}" type="text" wd-place-holder placeholder="真实姓名" ng-model="person.real_name">
-                <br>
-                <input ng-class="{error: person.uiIdNoError}" type="text" wd-place-holder placeholder="身份证号码" ng-model="person.id_no">
-                <br>
-                <input ng-class="{error: person.uiEmailError}" type="text" wd-place-holder placeholder="电子邮件" ng-model="person.email">
-                <br>
-                <input ng-class="{error: person.uiQQError}" type="text" wd-place-holder placeholder="QQ 号码" ng-model="person.qq">
-                <br>
-                <input type="text" wd-place-holder placeholder="邀请码" ng-model="person.invite_code">
-                <br>
-                <p class="tip">输入邀请码可获得额外 <span class="strong">200 美元</span> 赠金</p>
-                <br>
-                <p class="error">{{person.uiRealNameError || person.uiIdNoError || person.uiEmailError || person.uiQQError}}</p>
-                <br>
-                <div class="btn" ng-click="nextStep();">下一步</div>
-                <br>
-            </div>
-            <div ng-if="person.real_name" class="item-body person-info-show" ng-class="{hide: step !== 3}">
-                <div class="wrapper">
-                    <p class="title">真实姓名</p><p class="word">{{person.real_name}}</p><br>
-                    <p class="title">身份证号码</p><p class="word">{{person.id_no}}</p><br>
-                    <p class="title">电子邮件</p><p class="word">{{person.email}}</p><br>
-                    <p class="title">QQ 号码</p><p class="word">{{person.qq}}</p><br>
-                </div>
-                <p class="tip">填写邀请码可额外获得 <span class="strong">200 美元</span> 增金</p>
-            </div>
-        </div>
-        <div class="item">
-            <div class="item-header" ng-class="{hide: step < 3}">3. 提交实名认证</div>
-            <div class="item-body real-info" ng-class="{hide: step !== 3}">
-                <div class="upload">
-                    <div ng-class="{error: person.uiFrontImageStatus === 3, success: person.uiFrontImageStatus === 2}" class="front" wd-upload-form data-face="front">
-                    </div>
-                    <div ng-class="{error: uiBackImageStatus === 3, success: person.uiBackImageStatus === 2}" class="back" wd-upload-form data-face="back">
-                    </div>
-                    <div class="upload-tip">
-                        <p ng-if="person.uiFrontImageStatus === 1" class="status uploading">正在上传...</p>
-                        <p ng-if="person.uiFrontImageStatus === 2" class="status success">上传成功</p>
-                        <p ng-if="person.uiFrontImageStatus === 3" class="status error">{{person.uiFrontImageError}}</p>
-                    </div>
-                    <div class="upload-tip">
-                        <p ng-if="person.uiBackImageStatus === 1" class="status uploading">正在上传...</p>
-                        <p ng-if="person.uiBackImageStatus === 2" class="status success">上传成功</p>
-                        <p ng-if="person.uiBackImageStatus === 3" class="status error">{{person.uiBackImageError}}</p>
-                    </div>
-                </div>
-                <div ng-if="(person.uiFrontImageStatus === 2) && (person.uiBackImageStatus === 2)" class="btn" ng-click="nextStep();">开通账户</div>
-            </div>
-            <div class="item-body success" ng-class="{hide: step !== 4}">
-                <div class="tip">
-                    <p>恭喜，您已经成功开通交易账户，<span class="strong">700 美元</span> 赠金已打入您账户</p>
-                    <br>
-                    <p>下载客户端即可开始交易</p>
-                </div>
-                <div class="client">
-                    <div class="mt4"></div>
-                    <div class="android"></div>
-                    <div class="qrcode"></div>
-                </div>
-                <div class="btn" ng-click="nextStep();">管理账号</div>
-            </div>
-        </div>
+    <div ng-if="register.uiSuccess" class="success">
+        <div class="icon-right"></div>
+        <p class="title">注册成功，你现在开通股票账户即可获得<span class="strong">三个月免费交易</span>。</p>
+        <a href="#/account-open" class="btn">立即开户</a>
     </div>
+    <div ng-if="loading" wd-loading></div>
 </div>
+<div wd-footer></div>

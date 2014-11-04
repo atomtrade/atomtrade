@@ -1,46 +1,50 @@
-.wd-login {
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+
+.wd-account-login {
+    min-width: $min-page-width;
     position: relative;
-    margin: 0px auto;
-    width: $min-page-width;
-    .header {
-        .logo {
-            @include wd-image('logo-black.png');
-            cursor: pointer;
-        }
+    .wd-wrapper {
+        top: -670px;
+    }
+    .banner {
+        @include wd-image('login-banner.jpg');
+        width: 100%;
+        margin-bottom: -7px;
     }
     .login-form {
-        text-align: center;
-        margin: 100px auto 0px auto;
-        padding: 25px 0px 30px 0px;
-        width: 268px;
-        border-radius: 5px;
-        background-color: $standard-black;
-        input {
-            margin-bottom: 8px;
-            width: 210px;
-            text-align: center;
-        }
-        .btn {
-            width: 204px;
-            margin-top: 13px;
-        }
-        .tip {
-            margin-top: 5px;
-            font-size: 10px;
-            color: $standard-gray;
-            a {
-                font-size: 10px;
-                color: $standard-gray;
-                text-decoration: underline;
-            }
-        }
-    }
-    .loading {
+        height: 238px;
+        width: 303px;
         background-color: $standard-white;
         position: absolute;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
+        top: 140px;
+        right: 5%;
+        padding: 30px 32px 25px 27px;
+        border-radius: 2px;
+        @include box-shadow(0px 1px 3px #c8c8c8);
+        input {
+            border: 1px solid #dcdcdc;
+            width: 280px;
+            padding: 11px 10px;
+        }
+        .title {
+            font-size: 18px;
+        }
+        .item {
+            margin-bottom: 16px;
+        }
+        .login-btn {
+            width: 168px;
+            padding: 10px 14px;
+        }
+        .register-btn {
+            width: 73px;
+            padding: 10px 14px;
+            background-color: $standard-orange;
+        }
     }
 }

@@ -1,0 +1,41 @@
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+
+.wd-my-index {
+    .wd-my-body {
+        .item {
+            p {
+                margin-right: -3px;
+                display: inline-block;
+                background-color: $standard-gray;
+                height: 35px;
+                padding-left: 30px;
+                padding-top: 15px;
+                width: 50%;
+                &:hover {
+                    background-color: #e0f7ff;
+                }
+            }
+            .title {
+
+                width: 130px;
+                .icon-mobile {
+                    @include wd-image('icon-mobile.png');
+                    margin-bottom: -6px;
+                }
+                .icon-hk {
+                    @include wd-image('icon-hk.png');
+                    margin-bottom: -6px;
+                }
+                .icon-us {
+                    @include wd-image('icon-us.png');
+                    margin-bottom: -6px;
+                }
+            }
+        }
+    }
+}

@@ -1,33 +1,73 @@
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+
 'use strict';
 
 /**
  * @ngdoc overview
- * @name tigerwitApp
+ * @name atomApp
  * @description
- * # tigerwitApp
+ * # atomApp
  *
  * Main module of the application.
  */
 angular
-.module('tigerwitApp', 
-['ngCookies', 'ngResource', 'ngRoute', 'ngSanitize'])
-.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+.module('atomApp', 
+['ngCookies', 'ngResource', 'ngRoute', 'ngSanitize', 'ngAnimate'])
+.config(['$routeProvider', '$httpProvider', 
+function ($routeProvider, $httpProvider) {
 $routeProvider
     .when('/index', {
-        templateUrl: 'views/account/index.html',
-        controller: 'registerCtrl'
+        templateUrl: 'views/index/index.html',
+        controller: 'indexCtrl'
     })
-    .when('/login', {
-        templateUrl: 'views/account/login.html',
-        controller: 'loginCtrl'
+    .when('/download', {
+        templateUrl: 'views/index/download.html',
+        controller: 'downloadCtrl'
     })
-    .when('/register', {
+    .when('/account-register', {
         templateUrl: 'views/account/register.html',
         controller: 'registerCtrl'
     })
-    .when('/money', {
-        templateUrl: 'views/account/money.html',
-        controller: 'moneyCtrl'        
+    .when('/account-login', {
+        templateUrl: 'views/account/login.html',
+        controller: 'loginCtrl'
+    })
+    .when('/account-open', {
+        templateUrl: 'views/account/open.html',
+        controller: 'openAccountCtrl'
+    })
+    .when('/about-company', {
+        templateUrl: 'views/about/company.html'
+    })
+    .when('/about-license', {
+        templateUrl: 'views/about/license.html'
+    })
+    .when('/about-contact', {
+        templateUrl: 'views/about/contact.html'
+    })
+    .when('/about-money', {
+        templateUrl: 'views/about/money.html'
+    })
+    .when('/my-index', {
+        templateUrl: 'views/my/index.html',
+        controller: 'myCtrl'
+    })
+    .when('/my-change-password', {
+        templateUrl: 'views/my/change-password.html',
+        controller: 'myChangePasswordCtrl'
+    })
+    .when('/my-money-in', {
+        templateUrl: 'views/my/money-in.html',
+        controller: 'myMoneyInCtrl'
+    })
+    .when('/my-money-out', {
+        templateUrl: 'views/my/money-out.html',
+        controller: 'myMoneyOutCtrl'
     })
     .otherwise({
         redirectTo: '/index'

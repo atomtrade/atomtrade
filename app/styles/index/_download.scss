@@ -1,0 +1,98 @@
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+
+.wd-download {
+    min-width: $min-page-width;
+    background-color: $standard-gray;
+    .banner {
+        height: 300px;
+        @include wd-image('download-banner.jpg');
+        width: 100%;
+    }
+    .intro-info {
+        @include transition(all, 0.4s);
+        text-align: center;
+        height: 310px;
+        padding: 18px 20px 20px 20px;
+        .select-title {
+            .item {
+                float: left;
+                width: 50%;
+                text-align: center;
+                border-bottom: 1px solid #c8c8c8;
+                margin-bottom: 25px;
+                cursor: pointer;
+                .title {
+                    font-size: 20px;
+                    margin-bottom: 1px;
+                    @include opacity(0.5);
+                }
+                &.active {
+                    border-bottom: 2px solid $standard-blue;
+                    .title {
+                        margin-bottom: 0px;
+                        @include opacity(1);
+                    }
+                }
+            }
+        }
+        .block {
+            border-radius: 2px;
+            @include box-shadow(0px 1px 3px #c8c8c8);
+            padding-top: 30px;
+            cursor: pointer;
+            display: inline-block;
+            width: 24%;
+            height: 206px;
+            text-align: center;
+            background-color: $standard-white;
+            position: relative;
+            @include opacity(0.6);
+            .title {
+                font-size: 20px;
+                line-height: 30px;
+                height: 40px;
+                color: $standard-black;
+            }
+            .icon {
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+            .link {
+                position: absolute;
+                top: 0px;
+                bottom: 0px;
+                left: 0px;
+                right: 0px;
+            }
+            &:hover {
+                @include opacity(1);
+            }
+            .btn {
+                width: 80px;
+                background-color: $standard-deep-black;
+            }
+            p {
+                line-height: 0px;
+                height: 23px;
+                color: $standard-deep-gray;
+            }
+            .icon-win {
+                @include wd-image('icon-win.png');
+            }
+            .icon-apple {
+                @include wd-image('icon-apple.png');
+            }
+            .icon-android {
+                @include wd-image('icon-android.png');
+            }
+            .icon-pdf {
+                @include wd-image('icon-pdf.png');
+            }
+        }
+    }
+}

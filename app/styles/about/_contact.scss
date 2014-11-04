@@ -1,0 +1,36 @@
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+
+.wd-about-contact {
+    .map {
+        @include wd-image('location.png');
+        width: 680px;
+    }
+    .contact-btn {
+        margin-bottom: 30px;
+        border-radius: 3px;
+        height: 30px;
+        width: 130px;
+        line-height: 30px;
+        .icon-sms {
+            @include wd-image('icon-sms.png');
+            margin-top: -6px;
+            margin-left: -4px;
+        }
+    }
+    .qq-btn {
+        margin-right: 10px;
+        display: inline-block;
+        .icon-qq {
+            margin-bottom: -5px;
+            @include wd-image('icon-qq.png');
+        }
+    }
+    .address {
+        margin-top: 30px;
+    }
+}

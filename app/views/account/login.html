@@ -1,15 +1,40 @@
-<div class="wd-login" ng-keyDown="keyDown($event)">
-    <div class="header wd-header">
-        <a href="#/" class="logo"></a>
-    </div>
-    <div class="login-form">
-        <input type="text" wd-place-holder placeholder="手机号码" autofocus ng-model="login.phone"><br>
-        <input type="password" wd-place-holder placeholder="登录密码" ng-model="login.password"><br>
-        <p ng-if="login.uiLoginError" class="error">{{login.uiLoginError}}</p>
-        <div class="btn" ng-click="loginFun();">登录</div>
-        <p class="tip">无法登录？</p>
-    </div>
-    <div class="loading" ng-if="loading">
-        <div wd-loading></div>
+<!-- 
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+ -->
+
+<div wd-header></div>
+<div class="wd-account-login" ng-keyDown="keyDown($event)">
+    <div class="banner"></div>
+    <div class="wd-wrapper">
+        <div ng-if="!loading" class="login-form">
+            <div class="item">
+                <p class="title">使用手机号码登录</p>
+            </div>
+            <div class="item">
+                <input ng-class="{error: user.uiPhoneError}" type="text" wd-placeholder="手机号码" ng-model="user.phone">
+            </div>
+            <div class="item">
+                <input ng-class="{error: user.uiPasswordError}" type="password" wd-placeholder="登录密码" ng-model="user.password">
+            </div>
+            <div class="item">
+                <p class="error">{{user.uiPhoneError || user.uiPasswordError || user.uiServerError}}</p>
+            </div>
+            <div class="item">
+                <a class="btn login-btn" ng-click="login();">登录</a>
+                <a href="#/account-register" class="btn register-btn">注册</a>
+            </div>
+            <div class="item">
+                <a href="#/my-change-password">忘记密码？</a>
+            </div>
+        </div>
+        <div ng-if="loading" class="login-form">
+            <div wd-loading></div>
+        </div>
     </div>
 </div>
+<div wd-footer></div>

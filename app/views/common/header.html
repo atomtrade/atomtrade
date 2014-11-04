@@ -1,0 +1,41 @@
+<!-- 
+/**
+ * @author wangxiao
+ * 
+ * 每位工程师都有保持代码优雅的义务
+ * each engineer has a duty to keep the code elegant
+ */
+ -->
+
+<div class="wd-header">
+    <div class="wd-wrapper">
+        <div class="top-tips">
+            <p class="left">
+                <span>客服热线：400-150-0852</span>
+            </p>
+            <p class="right">
+                <a ng-if="!loading && !isLogin" href="#/account-login" class="login-btn">登录</a>
+                <a ng-if="!loading && !isLogin" href="#/account-register">注册</a>
+                <a ng-if="!loading && isLogin" ng-click="logout()">退出账号</a>
+                <a href="#/about-contact">联系我们</a>
+                <a href="#/account-open" class="btn open-btn">免费开户<span class="icon-right-angle"></span></a>
+            </p>
+        </div>
+        <div class="body">
+            <a class="logo" href="#/index"></a>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="wd-wrapper">
+            <div class="left nav-btns">
+                <a href="#/index" class="btn">首页</a>
+                <a href="#/download" class="btn">下载</a>
+                <a href="#/about-company" class="btn">关于</a>
+            </div>
+            <div class="right">
+                <!-- <div class="btn buy-btn">买卖股票</div> -->
+                <a href="#/my-index" class="btn my-btn">我的账户</a>
+            </div>
+        </div>
+    </div>
+</div>
