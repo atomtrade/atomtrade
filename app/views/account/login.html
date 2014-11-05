@@ -1,24 +1,26 @@
-<div class="wd-account-login wd-body">
-    <div class="header">
-        <div class="logo"></div>
-    </div>
-    <div ng-if="!loading" class="form">
-        <input type="text" placeholder="手机号码" 
-        ng-model="user.phone"
-        ng-click="user.uiPhoneError = '';">
-        <input type="password" placeholder="登录密码" 
-        ng-model="user.password"
-        ng-click="user.uiPasswordError = '';">
-        <p class="error">{{user.uiPhoneError || user.uiPasswordError || user.uiServerError}}</p>
-        <div class="btns">
-            <div class="btn login-btn" ng-click="login()">登录</div>
-            <a href="#/account-register" class="btn register-btn">注册</a>
+<div class="wd-account-login">
+    <div class="wd-body">
+        <div class="header">
+            <div class="logo"></div>
         </div>
-    </div>
-    <div ng-if="loading" class="form">
-        <div wd-loading></div>
-    </div>
-    <div class="footer">
-        <p>&copy;2014 Guoking.com.hk. All rights reserved.</p>
+        <div ng-if="!loading" class="form">
+            <input type="text" placeholder="手机号码" 
+            ng-model="user.phone"
+            ng-click="user.uiPhoneError = '';">
+            <input type="password" placeholder="登录密码" 
+            ng-model="user.password"
+            ng-click="user.uiPasswordError = '';">
+            <p class="error">{{user.uiPhoneError || user.uiPasswordError || user.uiServerError}}</p>
+            <div class="btns">
+                <div class="btn login-btn" ng-click="login()">登录</div>
+                <a href="#/account-register" class="btn register-btn">注册</a>
+            </div>
+        </div>
+        <div ng-if="loading" class="form">
+            <div wd-loading></div>
+        </div>
+        <div class="footer">
+            <p>&copy;2014 Guoking.com.hk. All rights reserved.</p>
+        </div>
     </div>
 </div>

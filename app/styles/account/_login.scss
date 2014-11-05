@@ -20,11 +20,17 @@
         height: 220px;
         position: relative;
         .btns {
+            text-align: left;
             margin-top: 20px;
+            width: 88%;
+            padding: 0px 15px;
             .login-btn {
-                width: 50%;
+                width: 48%;
+                float: left;
             }
             .register-btn {
+                margin-left: 10px;
+                float: right;
                 width: 26%;
                 background-color: $standard-orange;
             }
