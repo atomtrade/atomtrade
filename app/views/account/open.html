@@ -1,6 +1,6 @@
 <div wd-header></div>
 <div class="wd-account-open wd-body">
-    <div class="nav" ng-class="{hide: step !== 0}">
+    <div class="nav" ng-class="{hide: step !== 0 || loading}">
         <div class="nav-header">
             <p>开户流程指引</p>
         </div>
@@ -23,209 +23,203 @@
             </div>
         </div>
     </div>
-    <div class="body" ng-class="{hide: step !== 1}">
+    <div class="body" ng-class="{hide: step !== 1 || loading}">
         <p class="h2-title">开户资料</p>
         <div class="fill-form">
             <div class="item">
                 <p class="item-title">交易品种：</p>
-                <input type="checkbox" name="b">证券
-                <input type="checkbox" name="b">期货       
+                <input type="checkbox" ng-model="userInfo.usstock">美股
+                <input type="checkbox" ng-model="userInfo.hkstock">港股
+                <input type="checkbox" ng-model="userInfo.future">期货       
             </div>
             <div class="item">
-                <input type="text" placeholder="姓名">
+                <input type="text" placeholder="姓名" ng-model="userInfo.real_name" ng-blur="blurRealName()">
+            </div>
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !userInfo.uiRealNameError,
+                error: userInfo.uiRealNameError
+            }">
+                <p>{{userInfo.uiRealNameError}}</p>
             </div>
             <div class="item">
-                <input type="text" placeholder="身份证号">
+                <input type="text" placeholder="身份证号" ng-model="userInfo.id_no" ng-blur="blurIdNo();">
+            </div>
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !userInfo.uiIdNoError,
+                error: userInfo.uiIdNoError
+            }">
+                <p>{{userInfo.uiIdNoError}}</p>
             </div>
             <div class="item">
-                <input type="text" placeholder="签发机构（身份证背面）">
+                <input type="text" placeholder="签发机构（身份证背面）" ng-model="userInfo.id_org" ng-blur="blurIdOrg();">
+            </div>
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !userInfo.uiIdOrgError,
+                error: userInfo.uiIdOrgError
+            }">
+                <p>{{userInfo.uiIdOrgError}}</p>
             </div>
             <div class="item">
-                <input type="text" placeholder="电子邮箱">
+                <input type="text" placeholder="电子邮箱" ng-model="userInfo.email" ng-blur="blurEmail();">
+            </div>
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !userInfo.uiEmailError,
+                error: userInfo.uiEmailError
+            }">
+                <p>{{userInfo.uiEmailError}}</p>
             </div>
             <div class="item">
-                <input type="text" placeholder="QQ 号码">
+                <input type="text" placeholder="QQ 号码" ng-model="userInfo.qq" ng-blur="blurQq()">
+            </div>
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !userInfo.uiQqError,
+                error: userInfo.uiQqError
+            }">
+                <p>{{userInfo.uiQqError}}</p>
             </div>
             <div class="item">
                 <p class="item-title">职业状态：</p>
-                <select>
-                    <option value="">受雇</option>
-                    <option value="">自营</option>
-                    <option value="">退休</option>
-                    <option value="">待业</option>
-                    <option value="">其他</option>
-                </select>
+                <select ng-model="userInfo.uiJobOption" ng-options="item.name for item in uiJobOptions"></select>
             </div>
             <div class="item">
-                <input type="text" placeholder="公司名称">
+                <input type="text" placeholder="工作单位" ng-model="userInfo.company" ng-blur="blurCompany();">
             </div>            
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !userInfo.uiCompanyError,
+                error: userInfo.uiCompanyError
+            }">
+                <p>{{userInfo.uiCompanyError}}</p>
+            </div>
             <div class="item">
-                <input type="text" placeholder="所属行业">
+                <input type="text" placeholder="所属行业" ng-model="userInfo.business" ng-blur="blurBusiness()">
+            </div>
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !userInfo.uiBusinessError,
+                error: userInfo.uiBusinessError
+            }">
+                <p>{{userInfo.uiBusinessError}}</p>
             </div>
             <div class="btn" ng-click="nextStep();">保存，下一步</div>
         </div>
     </div>
-    <div class="body" ng-class="{hide: step !== 2}">
+    <div class="body" ng-class="{hide: step !== 2 || loading}">
         <p class="h2-title">风险评估表</p>
         <div class="fill-form">
             <div class="item">
                 <p class="item-title">资金来源</p>
-                <select>
-                    <option value="">薪资</option>
-                    <option value="">存款</option>
-                    <option value="">遗产/受赠</option>
-                    <option value="">投资收益</option>
-                </select>
+                <select ng-model="userInfo.uiMoneySourceOption" ng-options="item.name for item in uiMoneySourceOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">全年收入</p>
-                <select>
-                    <option value="">小于 20 万</option>
-                    <option value="">20-50 万</option>
-                    <option value="">50-100 万</option>
-                    <option value="">大于 100 万</option>
-                </select>
+                <select ng-model="userInfo.uiYearIncomeOption" ng-options="item.name for item in uiYearIncomeOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">总资产净值</p>
-                <select>
-                    <option value="">小于 50 万</option>
-                    <option value="">50-250 万</option>
-                    <option value="">250-500 万</option>
-                    <option value="">大于 500 万</option>
-                </select>
+                <select ng-model="userInfo.uiTotalAssetsOption" ng-options="item.name for item in uiTotalAssetsOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">预计入金</p>
-                <select>
-                    <option value="">小于 20 万</option>
-                    <option value="">20-50 万</option>
-                    <option value="">50-100 万</option>
-                    <option value="">大于 100 万</option>
-                </select>
+                <select ng-model="userInfo.uiEstimatedExpensesOption" ng-options="item.name for item in uiEstimatedExpensesOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">投资知识</p>
-                <select>
-                    <option value="">精通</option>
-                    <option value="">良好</option>
-                    <option value="">较好</option>
-                    <option value="">有限</option>
-                    <option value="">全无</option>
-                </select>
+                <select ng-model="userInfo.uiInvestKnowledgeOption" ng-options="item.name for item in uiInvestKnowledgeOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">投资目标</p>
-                <select>
-                    <option value="">增值</option>
-                    <option value="">收入</option>
-                    <option value="">投机</option>
-                    <option value="">对冲</option>
-                    <option value="">其他</option>
-                </select>
+                <select ng-model="userInfo.uiInvestObjectiveOption" ng-options="item.name for item in uiInvestObjectiveOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">风险承受能力</p>
-                <select>
-                    <option value="">低</option>
-                    <option value="">中</option>
-                    <option value="">高</option>
-                </select>
+                <select ng-model="userInfo.uiRiskToleranceOption" ng-options="item.name for item in uiRiskToleranceOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">股票</p>
-                <select>
-                    <option value="">没有经验</option>
-                    <option value="">少于 1 年</option>
-                    <option value="">1-2 年</option>
-                    <option value="">3 年以上</option>
-                </select>
+                <select ng-model="userInfo.uiStockExpOption" ng-options="item.name for item in uiStockExpOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">固定收益产品</p>
-                <select>
-                    <option value="">没有经验</option>
-                    <option value="">少于 1 年</option>
-                    <option value="">1-2 年</option>
-                    <option value="">3 年以上</option>
-                </select>
+                <select ng-model="userInfo.uiFixedIncomeExpOption" ng-options="item.name for item in uiFixedIncomeExpOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">债券</p>
-                <select>
-                    <option value="">没有经验</option>
-                    <option value="">少于 1 年</option>
-                    <option value="">1-2 年</option>
-                    <option value="">3 年以上</option>
-                </select>
+                <select ng-model="userInfo.uiBondExpOption" ng-options="item.name for item in uiBondExpOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">期货/期货期权</p>
-                <select>
-                    <option value="">没有经验</option>
-                    <option value="">少于 1 年</option>
-                    <option value="">1-2 年</option>
-                    <option value="">3 年以上</option>
-                </select>
+                <select ng-model="userInfo.uiFutureExpOption" ng-options="item.name for item in uiFutureExpOptions"></select>
             </div>
             <div class="item">
                 <p class="item-title">外汇/贵金属</p>
-                <select>
-                    <option value="">没有经验</option>
-                    <option value="">少于 1 年</option>
-                    <option value="">1-2 年</option>
-                    <option value="">3 年以上</option>
-                </select>
+                <select ng-model="userInfo.uiForexExpOption" ng-options="item.name for item in uiForexExpOptions"></select>
             </div>
             <div class="btn" ng-click="nextStep();">保存，下一步</div>
         </div>
     </div>
-    <div class="body" ng-class="{hide: step !== 3}">
+    <div class="body" ng-class="{hide: step !== 3 || loading}">
         <p class="h2-title">其他信息</p>
         <div class="fill-form-long">
             <div class="item">
-                <input type="checkbox" checked="checked">
-                <p>本人是否本账户的最终及唯一受益拥有人？</p>
+                <p ng-if="userInfo.uiSelect1Error" class="error">请勾选确认</p>
+                <input type="checkbox" ng-model="userInfo.uiSelect1">
+                <p>本人是本账户的最终及唯一受益拥有人？</p>
             </div>
             <div class="item">
-                <input type="checkbox" checked="checked">
-                <p>本人是否与国京(香港)证券与期货有限公司或其子公司及关联公司的董事或雇员有任何关系？</p>
+                <p ng-if="userInfo.uiSelect2Error" class="error">请勾选确认</p>
+                <input type="checkbox" ng-model="userInfo.uiSelect2">
+                <p>本人与国京(香港)证券与期货有限公司或其子公司及关联公司的董事或雇员没有任何关系？</p>
             </div>
             <div class="item">
-                <input type="checkbox" checked="checked">
-                <p>本人是否为香港证券及期货事务监察委员会注册持牌人 (或注册人)、任何持牌法团 (或注册机构) 的董事、雇员或认可人士？</p>
+                <p ng-if="userInfo.uiSelect3Error" class="error">请勾选确认</p>
+                <input type="checkbox" ng-model="userInfo.uiSelect3">
+                <p>本人不是香港证券及期货事务监察委员会注册持牌人 (或注册人)、任何持牌法团 (或注册机构) 的董事、雇员或认可人士？</p>
             </div>
             <div class="item">
-                <input type="checkbox" checked="checked">
-                <p>您是否在国京(香港)证券与期货有限公司已开设由您或您代表他人、团体或公司实益持有、拥有或运作、或您拥有直接或间接利益的账户？</p>
+                <p ng-if="userInfo.uiSelect4Error" class="error">请勾选确认</p>
+                <input type="checkbox" ng-model="userInfo.uiSelect4">
+                <p>您没有在国京(香港)证券与期货有限公司已开设由您或您代表他人、团体或公司实益持有、拥有或运作、或您拥有直接或间接利益的账户？</p>
             </div>
+            <p class="form-title">请确认已阅读并同意以下条款细则</p>
             <div class="item">
-                <input type="checkbox" checked="checked">
+                <p ng-if="userInfo.uiSelect5Error" class="error">请勾选确认</p>
+                <input type="checkbox" ng-model="userInfo.uiSelect5">
                 <p>我已阅读并同意
-                    <a href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/secret.pdf">隐私政策</a>
+                    <a target="_blank" href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/secret.pdf">隐私政策</a>
                 </p>
             </div>
             <div class="item">
-                <input type="checkbox" checked="checked">
+                <p ng-if="userInfo.uiSelect6Error" class="error">请勾选确认</p>
+                <input type="checkbox" ng-model="userInfo.uiSelect6">
                 <p>我已阅读并知悉
-                    <a href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/futures_risk.pdf">风险披露声明</a>、
-                    <a href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/stock_agrement.pdf">证券客户协议书</a>、
-                    <a href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/futures_agrement.pdf">期货客户协议书</a>
+                    <a target="_blank" href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/futures_risk.pdf">风险披露声明</a>、
+                    <a target="_blank" href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/stock_agrement.pdf">证券客户协议书</a>、
+                    <a target="_blank" href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/futures_agrement.pdf">期货客户协议书</a>
                 </p>
             </div>
             <div class="item">
-                <input type="checkbox" checked="checked">
+                <p ng-if="userInfo.uiSelect7Error" class="error">请勾选确认</p>
+                <input type="checkbox" ng-model="userInfo.uiSelect7">
                 <p>我已确认上述信息真实有效</p>
             </div>
             <div class="btn" ng-click="nextStep();">保存，下一步</div>
         </div>
     </div>
-    <div class="success" ng-class="{hide: step !== 4}">
+    <div class="success" ng-class="{hide: step !== 4 || loading}">
         <p class="title strong">恭喜您资料提交成功</p>
         <p>后续我们的工作人员会与你取得联系</p>
         <p>请保持电话畅通</p>
         <p class="strong">客户电话：400-150-0852</p>
+        <a class="btn" href="#/my-index">返回首页</a>
     </div>
-    <div ng-if="loading" wd-loading></div>
+    <div ng-if="loading" class="loading">
+        <div wd-loading></div>
+    </div>
 </div>
 <div wd-footer></div>

@@ -1,5 +1,25 @@
 <div wd-header></div>
 <div class="wd-my-index wd-body">
+    <div class="item">
+        <p>
+            <span class="title">账号</span>
+            <span>{{userInfo.phone}}</span>
+            <span class="logout-btn" ng-click="logout()">退出账号</span>
+        </p>
+    </div>
+    <div class="item">
+        <p>
+            <span>HKD 港币：</span>
+            <span class="strong">HK${{userInfo.hkCash}}</span>
+        </p>
+    </div>
+    <div class="item">
+        <p>
+            <span>USD 美元：</span>
+            <span class="strong">${{userInfo.usCash}}</span>
+        </p>
+    </div>
+    <div ng-if="loading" wd-loading></div>
     <a href="#/account-open" class="btn">继续开户</a>
 </div>
 <div wd-footer></div>

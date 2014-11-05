@@ -17,6 +17,8 @@
         }
     }
     .form {
+        height: 220px;
+        position: relative;
         .btns {
             margin-top: 20px;
             .login-btn {
@@ -26,6 +28,12 @@
                 width: 26%;
                 background-color: $standard-orange;
             }
+        }
+        .error {
+            text-align: left;
+        }
+        .loading {
+            top: 30%;
         }
     }
     .footer {

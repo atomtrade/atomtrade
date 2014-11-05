@@ -33,7 +33,7 @@ angular.module('atomApp')
             remove(name);
         },
         removeAll: function() {
-            var list = ['phone', 'password', 'register-step', 'is_set_info', 'is_set_id_pic'];
+            var list = ['userInfo'];
             $.each(list, function(i, v) {
                 remove(v);
             });

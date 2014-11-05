@@ -53,10 +53,10 @@
         placeholder="邀请码">
         <div class="form-item-tips" 
         ng-class="{
-            hide: !register.uiInviteCodeTip && !register.uiInviteCodeError,
-            error: register.uiInviteCodeError
+            hide: !register.uiInviteCodeTip && !register.uiInviteCodeError && !register.uiServerError,
+            error: register.uiInviteCodeError || register.uiServerError
         }">
-            <p>{{register.uiInviteCodeTip || register.uiInviteCodeError}}</p>
+            <p>{{register.uiInviteCodeTip || register.uiInviteCodeError || register.uiServerError}}</p>
         </div>
         <div class="btn register-btn" ng-click="registerAccount();">立即注册</div>
         <div class="ask">

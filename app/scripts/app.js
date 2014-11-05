@@ -33,7 +33,8 @@ $routeProvider
         controller: 'openAccountCtrl'
     })
     .when('/my-index', {
-        templateUrl: 'views/my/my-index.html'
+        templateUrl: 'views/my/my-index.html',
+        controller: 'myCtrl'
     })
     .otherwise({
         redirectTo: '/account-login'

@@ -47,6 +47,9 @@ function($rootScope, $http, wdStorage) {
         },
         getInfo: function() {
             return $http.get('/get_info');
+        },
+        setRisk: function(opts) {
+            return $http.post('/risk', opts);
         }
     };
     // 结束 
