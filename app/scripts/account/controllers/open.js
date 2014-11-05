@@ -9,8 +9,8 @@
 
 angular.module('atomApp')
 .controller('openAccountCtrl', 
-['$scope', 'wdAccount', '$timeout', '$location', 'wdStorage', '$window', 'wdCheck',
-function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck) {
+['$scope', 'wdAccount', '$timeout', '$location', 'wdStorage', '$window', 'wdCheck', '$interval',
+function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $interval) {
     $scope.loading = true;
     wdAccount.check().then(function(data) {
         if (data.is_succ) {
@@ -320,4 +320,12 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck) {
             $scope.uiDraftSuccess = false;
         }, 2000);
     };
+
+    var timer = $interval(function() {
+        $scope.saveDraft();
+    }, 5000);
+
+    $scope.$on('$destroy', function() {
+        $interval.cancel(timer);
+    });
 }]);

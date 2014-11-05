@@ -61,4 +61,13 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, wdCheck) {
             $scope.login();
         }
     };
+
+    $scope.goToRegister = function() {
+        if ($scope.user.phone) {
+            wdStorage.item('phone', $scope.user.phone);
+        } else {
+            wdStorage.remove('phone');
+        }
+        $location.path('/account-register');
+    };
 }]);

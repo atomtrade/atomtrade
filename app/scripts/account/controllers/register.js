@@ -13,8 +13,9 @@ angular.module('atomApp')
 function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval, $window, wdCheck) {
     var verifyCodeTime = 60;
     $scope.loading = false;
+    var phone = wdStorage.item('phone');
     $scope.register = {
-        phone: '',
+        phone: phone || '',
         verify_code: '',
         password: '',
         invite_code: '',
