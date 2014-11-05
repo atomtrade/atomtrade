@@ -4,7 +4,7 @@
             <div class="logo"></div>
         </div>
         <div ng-if="!loading" class="form">
-            <input type="text" placeholder="手机号码" 
+            <input type="tel" placeholder="手机号码" 
             ng-model="user.phone"
             ng-click="user.uiPhoneError = '';">
             <input type="password" placeholder="登录密码" 
@@ -13,7 +13,7 @@
             <p class="error">{{user.uiPhoneError || user.uiPasswordError || user.uiServerError}}</p>
             <div class="btns">
                 <div class="btn login-btn" ng-click="login()">登录</div>
-                <a href="#/account-register" class="btn register-btn">注册</a>
+                <div class="btn register-btn" ng-click="goToRegister()">注册</div>
             </div>
         </div>
         <div ng-if="loading" class="form">

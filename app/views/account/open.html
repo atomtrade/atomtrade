@@ -63,7 +63,7 @@
                 <p>{{userInfo.uiIdOrgError}}</p>
             </div>
             <div class="item">
-                <input type="text" placeholder="电子邮箱" ng-model="userInfo.email" ng-blur="blurEmail();">
+                <input type="email" placeholder="电子邮箱" ng-model="userInfo.email" ng-blur="blurEmail();">
             </div>
             <div class="form-item-tips" 
             ng-class="{
@@ -73,7 +73,7 @@
                 <p>{{userInfo.uiEmailError}}</p>
             </div>
             <div class="item">
-                <input type="text" placeholder="QQ 号码" ng-model="userInfo.qq" ng-blur="blurQq()">
+                <input type="tel" placeholder="QQ 号码" ng-model="userInfo.qq" ng-blur="blurQq()">
             </div>
             <div class="form-item-tips" 
             ng-class="{

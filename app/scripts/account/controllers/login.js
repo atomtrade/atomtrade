@@ -63,4 +63,11 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, wdCheck) {
             });
         }
     };
-}]);
+
+    $scope.goToRegister = function() {
+        if ($scope.user.phone) {
+            wdStorage.item('phone', $scope.user.phone);
+        }
+        $location.path('/account-register');
+    };
+}]); 

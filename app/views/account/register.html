@@ -4,7 +4,7 @@
         <p>注册账号</p>
     </div>
     <div class="form" ng-if="!register.uiSuccess" >
-        <input type="text" 
+        <input type="tel" 
         ng-model="register.phone" 
         ng-focus="focusPhone();"
         ng-blur="blurPhone()"
@@ -46,11 +46,11 @@
             <p>{{register.uiPasswordTip || register.uiPasswordError}}</p>
         </div>
         <p class="title"></p>
-        <input type="text" wd-placeholder="可选填" 
+        <input type="tel"
         ng-model="register.invite_code" 
         ng-focus="focusInviteCode();"
         ng-blur="blurInviteCode();"
-        placeholder="邀请码">
+        placeholder="邀请码（选填）">
         <div class="form-item-tips" 
         ng-class="{
             hide: !register.uiInviteCodeTip && !register.uiInviteCodeError && !register.uiServerError,
