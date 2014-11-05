@@ -23,8 +23,8 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck) {
     $scope.step = 1;
     $scope.userInfo = {
         // 交易品种
-        // 股票和期权
-        stock: true,
+        usstock: true,
+        hkstock: true,
         // 期货
         future: false,
         real_name: '',

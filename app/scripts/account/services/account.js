@@ -35,6 +35,10 @@ function($rootScope, $http, wdStorage, $q) {
                         d.resolve({
                             is_succ: true
                         });
+                    } else {
+                        d.resolve({
+                            is_succ: false
+                        });         
                     }
                 });
             }
