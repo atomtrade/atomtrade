@@ -103,7 +103,7 @@ function ($scope, wdAccount, $location, wdCheck, $interval, wdStorage) {
         if (!res) {
             $scope.userInfo.uiNewPwdError = '';
             return true;
-        } else if ($scope.userInfo.new_pwd === $scope.userInfo.pwd) {
+        } else if ($scope.isLogin && $scope.userInfo.new_pwd === $scope.userInfo.pwd) {
             $scope.userInfo.uiNewPwdError = '新密码与原密码居然一致';
             return false;
         } else {
