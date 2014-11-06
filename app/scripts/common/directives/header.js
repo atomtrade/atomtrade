@@ -8,8 +8,8 @@
 'use strict';
 
 angular.module('atomApp')
-.directive('wdHeader', ['$location', '$window', 'wdAccount',
-function($location, $window, wdAccount) {
+.directive('wdHeader', ['$location', '$window', 'wdAccount', '$interval',
+function($location, $window, wdAccount, $interval) {
 return {
     restrict: 'A',
     templateUrl: 'views/common/header.html',
@@ -45,11 +45,26 @@ return {
             $scope.loading = true;
             wdAccount.logout().then(function(data) {
                 $scope.loading = false;
-                if (data.is_succ) {
-                    $location.path('/index');
-                }
+                $location.path('/index');
             });
         };
+
+        // 循环检测登录状态（出于安全考虑，如果多个 tab 打开，那一个退出，应该全部被退出）
+        var timer = $interval(function() {
+            switch (path) {
+                case '/account-open':
+                case '/my-index':
+                case '/my-change-password':
+                case '/my-money-in':
+                case '/my-money-out':
+                    wdAccount.check().then(function(data) {
+                        if (!data.is_succ) {
+                            $location.path('/account-login');
+                        }
+                    });
+                break;
+            }
+        }, 5000);
     }
 };
 }]);

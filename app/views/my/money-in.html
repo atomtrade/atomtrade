@@ -52,7 +52,7 @@
             <!-- 美元 end -->
         </div>
         <div class="item">
-            <p class="title">存入金额<span>（港币）</span></p>
+            <p class="title">存入金额<span ng-if="money.currency === 'hkd'">（港币）</span><span ng-if="money.currency === 'usd'">（美元）</span></p>
             <input type="text" ng-model="money.amount" ng-blur="checkAmount()">
             <p class="error">{{money.uiAmountError}}</p>
         </div>

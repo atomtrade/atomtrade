@@ -13,7 +13,7 @@
         border-bottom: 1px solid $standard-gray;
     }
     .form {
-        input[type=text] {
+        input[type=text], input[type=password] {
             width: 200px;
             &.auth-code-input {
                 width: 104px;

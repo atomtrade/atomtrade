@@ -115,6 +115,11 @@ select {
     &:hover {
         @include opacity(0.8);
     }
+    &.disabled {
+        background-color: $standard-deep-gray;
+        cursor: default;
+        @include opacity(0.8);
+    }
     &:active {
         @include opacity(1);
     }

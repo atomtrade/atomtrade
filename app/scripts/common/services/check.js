@@ -62,6 +62,8 @@ function($rootScope) {
                 return '密码不能为纯字母';
             } else if (password.length < 6) {
                 return '密码不能小于 6 位';
+            } else if (/[^\dA-Za-z]/.test(password)) {
+                return '密码不要用中文或者特殊字符';
             } else {
                 return false;
             }

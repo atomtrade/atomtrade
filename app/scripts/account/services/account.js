@@ -11,14 +11,13 @@ angular.module('atomApp')
 .factory('wdAccount', 
 ['$rootScope', '$http', 'wdStorage', '$q',
 function($rootScope, $http, wdStorage, $q) {
-    var isLogin = false;
     // 是否检查过登录状态
     var isCheckLoginFlag = false;
     return {
         check: function() {
             var d = $q.defer();
             if (isCheckLoginFlag) {
-                if (isLogin) {
+                if (wdStorage.item('isLogin')) {
                     d.resolve({
                         is_succ: true
                     });
@@ -31,14 +30,15 @@ function($rootScope, $http, wdStorage, $q) {
                 isCheckLoginFlag = true;
                 $http.get('/check').then(function(data) {
                     if (data.is_succ) {
-                        isLogin = true;
+                        wdStorage.item('isLogin', true);
                         d.resolve({
                             is_succ: true
                         });
                     } else {
+                        wdStorage.remove('isLogin');
                         d.resolve({
                             is_succ: false
-                        });         
+                        });
                     }
                 });
             }
@@ -59,14 +59,13 @@ function($rootScope, $http, wdStorage, $q) {
             var p = $http.post('/login', opts);
             p.then(function(data) {
                 if (data.is_succ) {
-                    isLogin = true;
+                    wdStorage.item('isLogin', true);
                 }
             });
             return p;
         },
         logout: function() {
             wdStorage.removeAll();
-            isLogin = false;
             return $http.get('/logout');
         },
         setInfo: function(opts) {
