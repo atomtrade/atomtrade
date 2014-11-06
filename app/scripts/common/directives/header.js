@@ -64,6 +64,11 @@ return {
                 break;
             }
         }, 5000);
+        
+        $scope.$on('$destroy', function() {
+            $interval.cancel(timer);
+        });
+
     }
 };
 }]);
