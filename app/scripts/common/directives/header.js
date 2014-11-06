@@ -54,7 +54,6 @@ return {
             switch (path) {
                 case '/account-open':
                 case '/my-index':
-                case '/my-change-password':
                 case '/my-money-in':
                 case '/my-money-out':
                     wdAccount.check().then(function(data) {
