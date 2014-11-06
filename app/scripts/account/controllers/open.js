@@ -21,6 +21,12 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $
     });
 
     $scope.step = 1;
+    if (wdStorage.item('is_set_info')) {
+        $scope.step = 2;       
+    }
+    if (wdStorage.item('is_set_risk')) {
+        $scope.step = 3;       
+    }
     $scope.userInfo = {
         // 交易品种
         usstock: true,
@@ -323,7 +329,7 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $
 
     var timer = $interval(function() {
         $scope.saveDraft();
-    }, 5000);
+    }, 10000);
 
     $scope.$on('$destroy', function() {
         $interval.cancel(timer);

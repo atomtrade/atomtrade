@@ -60,6 +60,8 @@ function($rootScope, $http, wdStorage, $q) {
             p.then(function(data) {
                 if (data.is_succ) {
                     wdStorage.item('isLogin', true);
+                    wdStorage.item('is_set_info', true);
+                    wdStorage.item('is_set_risk', true);
                 }
             });
             return p;
