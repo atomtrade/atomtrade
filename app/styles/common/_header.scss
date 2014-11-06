@@ -33,7 +33,11 @@
                 background-color: $standard-green;
                 .icon-right-angle {
                     margin-top: 4px;
+                    margin-left: 0px;
                     @include wd-image("icon-right-angle.png");
+                }
+                span {
+                    vertical-align: bottom;
                 }
             }
         }

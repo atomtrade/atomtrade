@@ -8,8 +8,8 @@
 'use strict';
 angular.module('atomApp')
 .controller('myChangePasswordCtrl', 
-['$scope', 'wdAccount', '$location', 'wdCheck', '$interval', 'wdStorage',
-function ($scope, wdAccount, $location, wdCheck, $interval, wdStorage) {
+['$scope', 'wdAccount', '$location', 'wdCheck', '$interval', 'wdStorage', '$window',
+function ($scope, wdAccount, $location, wdCheck, $interval, wdStorage, $window) {
     $scope.loading = true;
     $scope.isLogin = false;
     var verifyCodeTime = 60;
@@ -100,12 +100,12 @@ function ($scope, wdAccount, $location, wdCheck, $interval, wdStorage) {
 
     $scope.checkNewPassword = function() {
         var res = wdCheck.checkPassword($scope.userInfo.new_pwd);
-        if (!res) {
-            $scope.userInfo.uiNewPwdError = '';
-            return true;
-        } else if ($scope.isLogin && $scope.userInfo.new_pwd === $scope.userInfo.pwd) {
+        if ($scope.isLogin && $scope.userInfo.new_pwd === $scope.userInfo.pwd) {
             $scope.userInfo.uiNewPwdError = '新密码与原密码居然一致';
             return false;
+        } else if (!res) {
+            $scope.userInfo.uiNewPwdError = '';
+            return true;
         } else {
             $scope.userInfo.uiNewPwdError = res;
             return false;
@@ -114,12 +114,12 @@ function ($scope, wdAccount, $location, wdCheck, $interval, wdStorage) {
 
     $scope.checkNewPassword2 = function() {
         var res = wdCheck.checkPassword($scope.userInfo.new_pwd2);
-        if (!res) {
-            $scope.userInfo.uiNewPwd2Error = '';
-            return true;
-        } else if ($scope.userInfo.new_pwd !== $scope.userInfo.new_pwd2) {
+        if ($scope.userInfo.new_pwd !== $scope.userInfo.new_pwd2) {
             $scope.userInfo.uiNewPwd2Error = '两次密码不一致';
             return false;
+        } else if (!res) {
+            $scope.userInfo.uiNewPwd2Error = '';
+            return true;
         } else {
             $scope.userInfo.uiNewPwd2Error = res;
             return false;
@@ -135,6 +135,7 @@ function ($scope, wdAccount, $location, wdCheck, $interval, wdStorage) {
             wdAccount.changePassword($scope.userInfo).then(function(data) {
                 $scope.loading = false;
                 if (data.is_succ) {
+                    $window.alert('密码修改成功，请重新登录');
                     wdAccount.logout();
                     $location.path('/account-login');
                 } else {

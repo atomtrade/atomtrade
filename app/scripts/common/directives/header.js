@@ -8,8 +8,8 @@
 'use strict';
 
 angular.module('atomApp')
-.directive('wdHeader', ['$location', '$window', 'wdAccount', '$interval',
-function($location, $window, wdAccount, $interval) {
+.directive('wdHeader', ['$location', '$window', 'wdAccount', '$interval', 'wdStorage',
+function($location, $window, wdAccount, $interval, wdStorage) {
 return {
     restrict: 'A',
     templateUrl: 'views/common/header.html',
@@ -18,6 +18,7 @@ return {
     link: function($scope, element, attributes) {
         var btns = element.find('.nav-btns').find('.btn').removeClass('active');
         var path = $location.path();
+        $scope.step = wdStorage.item('is_set_info');
         switch (path) {
             case '/index':
                 btns.eq(0).addClass('active');
@@ -41,6 +42,7 @@ return {
                 $scope.isLogin = true;
             }
         });
+
         $scope.logout = function() {
             $scope.loading = true;
             wdAccount.logout().then(function(data) {

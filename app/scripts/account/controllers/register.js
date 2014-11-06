@@ -63,7 +63,7 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
     };
     $scope.blurVerifyCode = function() {
         $scope.register.uiVerifyCodeTip = '';
-        $scope.checkVerifyCode();
+        // $scope.checkVerifyCode();
     };
     $scope.blurPassword = function() {
         $scope.register.uiPasswordTip = '';
@@ -112,12 +112,12 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
 
     $scope.checkPassword2 = function() {
         var res = wdCheck.checkPassword($scope.register.password2);
-        if (!res) {
-            $scope.register.uiPassword2Error = '';
-            return true;
-        } else if ($scope.register.password !== $scope.register.password2) {
+        if ($scope.register.password !== $scope.register.password2) {
             $scope.register.uiPassword2Error = '密码两次输入的不一致';
             return false;
+        } else if (!res) {
+            $scope.register.uiPassword2Error = '';
+            return true;
         } else {
             $scope.register.uiPassword2Error = res;
             return false;
@@ -146,7 +146,7 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
             $scope.checkVerifyCode() && 
             $scope.checkPassword() && 
             $scope.checkPassword2() &&
-            $scope.uiSelected) {
+            $scope.register.uiSelected) {
             $scope.loading = true;
             wdAccount.register($scope.register).then(function(data) {
                 $scope.loading = false;

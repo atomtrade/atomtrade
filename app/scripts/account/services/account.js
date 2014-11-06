@@ -35,7 +35,7 @@ function($rootScope, $http, wdStorage, $q) {
                             is_succ: true
                         });
                     } else {
-                        wdStorage.remove('isLogin');
+                        wdStorage.removeAll();
                         d.resolve({
                             is_succ: false
                         });
@@ -52,7 +52,13 @@ function($rootScope, $http, wdStorage, $q) {
             });
         },
         register: function(opts) {
-            return $http.post('/register', opts);
+            var p = $http.post('/register', opts);
+            p.then(function(data) {
+                if (data.is_succ) {
+                    wdStorage.item('isLogin', true);
+                }
+            });
+            return p;
         },
         login: function(opts) {
             wdStorage.removeAll();
@@ -71,13 +77,25 @@ function($rootScope, $http, wdStorage, $q) {
             return $http.get('/logout');
         },
         setInfo: function(opts) {
-            return $http.post('/set_info', opts);
+            var p = $http.post('/set_info', opts);
+            p.then(function(data) {
+                if (data.is_succ) {
+                    wdStorage.item('is_set_info', true);
+                }
+            });
+            return p;
         },
         getInfo: function() {
             return $http.get('/get_info');
         },
         setRisk: function(opts) {
-            return $http.post('/risk', opts);
+            var p = $http.post('/risk', opts);
+            p.then(function(data) {
+                if (data.is_succ) {
+                    wdStorage.item('is_set_risk', true);
+                }
+            });
+            return p;
         },
         changePassword: function(opts) {
             return $http.post('/change_password', opts);
