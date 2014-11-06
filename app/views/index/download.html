@@ -5,13 +5,39 @@
         <div class="wd-wrapper">
             <div class="select-title">
                 <div class="item" ng-class="{active: select === 1}" ng-click="select = 1;">
-                    <p class="title">国京证券</p>
+                    <p class="title">美股</p>
                 </div>
                 <div class="item" ng-class="{active: select === 2}" ng-click="select = 2;">
-                    <p class="title">国京期货</p>
+                    <p class="title">港股</p>
+                </div>
+                <div class="item" ng-class="{active: select === 3}" ng-click="select = 3;">
+                    <p class="title">期货</p>
                 </div>
             </div>
-            <div class="select-item" ng-class="{hide: select === 2}">
+            <div class="select-item" ng-class="{hide: select !== 1}">
+                <div class="block">
+                    <div class="icon icon-apple"></div>
+                    <p class="title">iPhone 版本</p>
+                    <p>更新日期：2014-03-31</p>
+                    <div class="btn">下载</div>
+                    <a class="link" target="_blank" href="https://itunes.apple.com/cn/app/guo-jing-shan-dian-jiao-yi/id834107884?mt=8"></a>
+                </div>
+                <div class="block">
+                    <div class="icon icon-android"></div>
+                    <p class="title">Android 版本</p>
+                    <p>更新日期：2014-03-31</p>
+                    <div class="btn">下载</div>
+                    <a class="link" target="_blank" href="http://119.9.73.199:81/static/tws.apk"></a>
+                </div>
+                <div class="block">
+                    <div class="icon icon-win"></div>
+                    <p class="title">Windows 版本</p>
+                    <p>更新日期：2014-03-31</p>
+                    <div class="btn">下载</div>
+                    <a class="link" target="_blank" href="http://119.9.73.199:81/static/tws.exe"></a>
+                </div>
+            </div>
+            <div class="select-item" ng-class="{hide: select !== 2}">
                 <div class="block">
                     <div class="icon icon-win"></div>
                     <p class="title">Windows 版本</p>
@@ -34,7 +60,7 @@
                     <a class="link" target="_blank" href="http://www.guoking.com.hk/n/soft/26142032EF228E00.apk"></a>
                 </div>
             </div>
-            <div class="select-item" ng-class="{hide: select === 1}">
+            <div class="select-item" ng-class="{hide: select !== 3}">
                 <div class="block">
                     <div class="icon icon-win"></div>
                     <p class="title">Windows 版本</p>
