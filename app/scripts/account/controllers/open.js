@@ -255,7 +255,7 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $
         checkEmail();
     };
     $scope.blurQq = function() {
-        checkQQ();
+        // checkQQ();
     };
     $scope.blurPostAddress = function() {
         checkPostAddress();
@@ -264,7 +264,7 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $
         checkCompany();
     };
     $scope.blurBusiness = function() {
-        checkBusiness();
+        // checkBusiness();
     };
     $scope.blurWorkPhone = function() {
         checkWorkPhone();
@@ -419,11 +419,11 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $
                     checkIdOrg() && 
                     // checkHomeAddress() && 
                     checkEmail() && 
-                    checkQQ() && 
-                    checkCompany() &&
+                    // checkQQ() && 
+                    // checkBusiness() &&
                     // checkPostAddress() && 
                     // checkWorkAddress() && 
-                    checkBusiness()) {
+                    checkCompany()) {
                         wdAccount.setInfo($scope.userInfo).then(function(data) {
                             $scope.loading = false;
                             if (data.is_succ) {
