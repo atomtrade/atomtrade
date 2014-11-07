@@ -48,6 +48,7 @@ return {
             wdAccount.logout().then(function(data) {
                 $scope.loading = false;
                 $location.path('/index');
+                $scope.isLogin = false;
             });
         };
 

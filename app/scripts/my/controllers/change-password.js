@@ -100,7 +100,7 @@ function ($scope, wdAccount, $location, wdCheck, $interval, wdStorage, $window) 
 
     $scope.checkNewPassword = function() {
         var res = wdCheck.checkPassword($scope.userInfo.new_pwd);
-        if ($scope.isLogin && $scope.userInfo.new_pwd === $scope.userInfo.pwd) {
+        if ($scope.isLogin && $scope.userInfo.new_pwd && $scope.userInfo.new_pwd === $scope.userInfo.pwd) {
             $scope.userInfo.uiNewPwdError = '新密码与原密码居然一致';
             return false;
         } else if (!res) {
@@ -135,8 +135,8 @@ function ($scope, wdAccount, $location, wdCheck, $interval, wdStorage, $window) 
             wdAccount.changePassword($scope.userInfo).then(function(data) {
                 $scope.loading = false;
                 if (data.is_succ) {
-                    $window.alert('密码修改成功，请重新登录');
                     wdAccount.logout();
+                    $window.alert('密码修改成功，请重新登录');
                     $location.path('/account-login');
                 } else {
                     $scope.userInfo.uiServerError = data.error_msg;
@@ -155,6 +155,7 @@ function ($scope, wdAccount, $location, wdCheck, $interval, wdStorage, $window) 
             wdAccount.findPassword($scope.userInfo).then(function(data) {
                 $scope.loading = false;
                 if (data.is_succ) {
+                    $window.alert('密码修改成功，请重新登录');
                     $location.path('/account-login');
                 } else {
                     $scope.userInfo.uiServerError = data.error_msg;

@@ -137,7 +137,12 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
     $scope.verifyPhone = function() {
         if ($scope.checkPhone()) {
             $scope.startCountdown();
-            wdAccount.verifyPhone($scope.register.phone);
+            wdAccount.verifyPhone($scope.register.phone).then(function(data) {
+                if (!data.is_succ) {
+                    $scope.uiCountdown = 0;
+                    $scope.register.uiServerError = data.error_msg;
+                }
+            });
         }
     };
 

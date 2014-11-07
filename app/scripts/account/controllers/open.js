@@ -143,10 +143,10 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $
 
     function checkRealName() {
         if (!$scope.userInfo.real_name) {
-            $scope.userInfo.uiRealNameError = '真实姓名不能为空';
+            $scope.userInfo.uiRealNameError = '请填写「真实姓名」';
             return false;
         } else if (/[u4E00-u9FA5]/.test($scope.userInfo.real_name)) {
-            $scope.userInfo.uiRealNameError = '真实姓名必须是中文';
+            $scope.userInfo.uiRealNameError = '「真实姓名」必须是中文';
             return false;
         } else {
             $scope.userInfo.uiRealNameError = '';
@@ -186,12 +186,13 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $
     }
 
     function checkEmail() {
-        if (!$scope.userInfo.email) {
-            $scope.userInfo.uiEmailError = '请填写「电子邮件地址」';
-            return false;
-        } else {
+        var res = wdCheck.checkEmail($scope.userInfo.email);
+        if (!res) {
             $scope.userInfo.uiEmailError = '';
             return true;
+        } else {
+            $scope.userInfo.uiEmailError = res;
+            return false;
         }
     }
 
@@ -319,8 +320,12 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $
         }
     };
 
-    $scope.saveDraft = function() {
+    function saveDraft() {
         wdStorage.item('userInfo', JSON.stringify($scope.userInfo));
+    }
+
+    $scope.saveDraft = function() {
+        saveDraft();
         $scope.uiDraftSuccess = true;
         $timeout(function() {
             $scope.uiDraftSuccess = false;
@@ -328,8 +333,8 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $
     };
 
     var timer = $interval(function() {
-        $scope.saveDraft();
-    }, 10000);
+        saveDraft();
+    }, 1000);
 
     $scope.$on('$destroy', function() {
         $interval.cancel(timer);
