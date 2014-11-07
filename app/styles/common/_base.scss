@@ -121,6 +121,10 @@ select {
     &:active {
         @include opacity(1);
     }
+    &.disabled {
+        cursor: default;
+        background-color: $standard-deep-gray;
+    }
 }
 
 .strong {

@@ -16,8 +16,8 @@ function($rootScope) {
         //加权因子
         var arrExp = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
         //校验码 
-        var arrValid = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2]; 
-        if (/^\d{17}\d|x$/i.test(cid)) {  
+        var arrValid = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2']; 
+        if (/^\d{17}\d|X$/i.test(cid)) {  
             var sum = 0, idx;  
             for (var i = 0; i < cid.length - 1; i ++ ) {  
                 // 对前17位数字与权值乘积求和  
@@ -26,7 +26,11 @@ function($rootScope) {
             // 计算模（固定算法）  
             idx = sum % 11;  
             // 检验第18为是否与校验码相等  
-            return arrValid[idx] === Number(cid.substr(17, 1).toUpperCase());
+            var last = cid.substr(17, 1);
+            if (last === 'x') {
+                last = last.toUpperCase();
+            }
+            return arrValid[idx] === last;
         } else {
             return false;
         }
@@ -37,18 +41,18 @@ function($rootScope) {
             if (!idNo) {
                 return '请填写「身份证号码」';
             } else if (!isCnNewID(idNo)) {
-                return '身份证号有误，请检查';
+                return '「身份证号码」有误，请检查';
             } else {
                 return false;
             }
         },
         checkPhone: function(phone) {
             if (!phone) {
-                return '手机号不能为空';
+                return '请填写「手机号码」';
             } else if (/\D/g.test(phone)) {
-                return '手机号不能非数字字符';
+                return '「手机号码」不能非数字字符';
             } else if (phone.length !== 11) {
-                return '手机号码位数不对';
+                return '「手机号码」位数不对';
             } else {
                 return false;
             }
@@ -62,13 +66,15 @@ function($rootScope) {
                 return '密码不能为纯字母';
             } else if (password.length < 6) {
                 return '密码不能小于 6 位';
+            } else if (/[^\dA-Za-z]/.test(password)) {
+                return '密码不要用中文或者特殊字符';
             } else {
                 return false;
             }
         },
         checkVerifyCode: function(code) {
             if (!code) {
-                return '验证码不能为空';
+                return '「验证码」不能为空';
             } else {
                 return false;
             }
@@ -78,6 +84,15 @@ function($rootScope) {
                 return '请填写数字';
             } else if (!amount) {
                 return '请填写金额';
+            } else {
+                return false;
+            }
+        },
+        checkEmail: function(email) {
+            if (!email) {
+                return '请填写「电子邮件地址」';
+            } else if (!/.+@.+\..+/.test(email)) {
+                return '「邮件地址」格式错误';
             } else {
                 return false;
             }

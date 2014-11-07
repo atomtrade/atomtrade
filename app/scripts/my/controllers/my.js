@@ -8,14 +8,21 @@
 'use strict';
 angular.module('atomApp')
 .controller('myCtrl', 
-['$scope', 'wdAccount', '$location',
-function ($scope, wdAccount, $location) {
+['$scope', 'wdAccount', '$location', 'wdStorage',
+function ($scope, wdAccount, $location, wdStorage) {
     $scope.loading = true;
     $scope.userInfo = {
         phone: '',
         usCash: 0,
         hkCash: 0
     };
+    $scope.step = 1;
+    if (wdStorage.item('is_set_info')) {
+        $scope.step = 2;
+    }
+    if (wdStorage.item('is_set_risk')) {
+        $scope.step = 3;
+    }
     wdAccount.check().then(function(data) {
         if (data.is_succ) {
             return wdAccount.getInfo();

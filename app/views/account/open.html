@@ -27,7 +27,7 @@
         <p class="h2-title">开户资料</p>
         <div class="fill-form">
             <div class="item">
-                <p class="item-title">交易品种：</p>
+                <p class="item-title category">交易品种：</p>
                 <input type="checkbox" ng-model="userInfo.usstock">美股
                 <input type="checkbox" ng-model="userInfo.hkstock">港股
                 <input type="checkbox" ng-model="userInfo.future">期货       
@@ -63,7 +63,7 @@
                 <p>{{userInfo.uiIdOrgError}}</p>
             </div>
             <div class="item">
-                <input type="email" placeholder="电子邮箱" ng-model="userInfo.email" ng-blur="blurEmail();">
+                <input type="text" placeholder="电子邮箱" ng-model="userInfo.email" ng-blur="blurEmail();">
             </div>
             <div class="form-item-tips" 
             ng-class="{

@@ -9,8 +9,8 @@
 
 angular.module('atomApp')
 .controller('openAccountCtrl', 
-['$scope', 'wdAccount', '$timeout', '$location', 'wdStorage', '$window', 'wdCheck',
-function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck) {
+['$scope', 'wdAccount', '$timeout', '$location', 'wdStorage', '$window', 'wdCheck', '$interval',
+function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $interval) {
     $scope.loading = true;
     wdAccount.check().then(function(data) {
         if (data.is_succ) {
@@ -20,6 +20,12 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck) {
         }
     });
     $scope.step = 1;
+    if (wdStorage.item('is_set_info')) {
+        $scope.step = 2;
+    }
+    if (wdStorage.item('is_set_risk')) {
+        $scope.step = 3;
+    }
     $scope.uiJobOptions = [
         {name: '受雇', value: 1},
         {name: '自营', value: 2},
@@ -104,7 +110,7 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck) {
     $scope.userInfo = {
         // 交易品种
         usstock: true,
-        hkstock: false,
+        hkstock: true,
         // 期货
         future: false,
         real_name: '',
@@ -205,7 +211,7 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck) {
 
     $scope.uiDraftSuccess = false;
 
-    var userInfo = wdStorage.item('userInfo');
+    var userInfo = wdStorage.item('userInfo-mobile');
     if (userInfo) {
         $scope.userInfo = JSON.parse(userInfo);
         $scope.userInfo.uiJobOption = findObj($scope.userInfo.uiJobOption, $scope.uiJobOptions);
@@ -312,12 +318,13 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck) {
     }
 
     function checkEmail() {
-        if (!$scope.userInfo.email) {
-            $scope.userInfo.uiEmailError = '请填写「电子邮件地址」';
-            return false;
-        } else {
+        var res = wdCheck.checkEmail($scope.userInfo.email);
+        if (!res) {
             $scope.userInfo.uiEmailError = '';
             return true;
+        } else {
+            $scope.userInfo.uiEmailError = res;
+            return false;
         }
     }
 
@@ -449,11 +456,24 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck) {
         }
     };
 
+    function saveDraft() {
+        wdStorage.item('userInfo-mobile', JSON.stringify($scope.userInfo));
+    }
+
     $scope.saveDraft = function() {
-        wdStorage.item('userInfo', JSON.stringify($scope.userInfo));
+        saveDraft();
         $scope.uiDraftSuccess = true;
         $timeout(function() {
             $scope.uiDraftSuccess = false;
         }, 2000);
     };
+
+    var timer = $interval(function() {
+        saveDraft();
+    }, 1000);
+
+    $scope.$on('$destroy', function() {
+        $interval.cancel(timer);
+    });
+
 }]);

@@ -29,11 +29,12 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         uiServerError: '',
         uiInviteCodeError: '',
         uiCountdown: 0,
+        uiSelected: true,
         uiSuccess: false
     };
 
     $scope.focusPhone = function() {
-        $scope.register.uiPhoneTip = '请输入您的手机号码，然后点击下面的「获取验证码」按钮';
+        $scope.register.uiPhoneTip = '请输入您的「手机号码」，然后点击的「获取验证码」按钮';
         $scope.register.uiPhoneError = '';
     };
     $scope.focusVerifyCode = function() {
@@ -41,7 +42,7 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         $scope.register.uiVerifyCodeError = '';
     };
     $scope.focusPassword = function() {
-        $scope.register.uiPasswordTip = '密码必须要大于 6 个字符，要包含数字和字母';
+        $scope.register.uiPasswordTip = '密码至少要 6 个字符，要包含数字和字母';
         $scope.register.uiPasswordError = '';
     };
     $scope.focusInviteCode = function() {
@@ -102,21 +103,30 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         $scope.register.uiCountdown = verifyCodeTime;
         var t = $interval(function() {
             $scope.register.uiCountdown --;
-            if (!$scope.register.uiCountdown) {
+            if ($scope.register.uiCountdown <= 0) {
+                $scope.register.uiCountdown = 0;
                 $interval.cancel(t);
             }
         }, 1000);
     };
 
     $scope.verifyPhone = function() {
-        if ($scope.checkPhone()) {
+        if ($scope.checkPhone() && !$scope.register.uiCountdown) {
             $scope.startCountdown();
-            wdAccount.verifyPhone($scope.register.phone);
+            wdAccount.verifyPhone($scope.register.phone).then(function(data) {
+                if (!data.is_succ) {
+                    $scope.register.uiCountdown = 0;
+                    $scope.register.uiServerError = data.error_msg;
+                }
+            });
         }
     };
 
     $scope.registerAccount = function() {
-        if ($scope.checkPhone() && $scope.checkVerifyCode() && $scope.checkPassword()) {
+        if ($scope.checkPhone() && 
+            $scope.checkVerifyCode() && 
+            $scope.checkPassword() && 
+            $scope.register.uiSelected) {
             $scope.loading = true;
             wdAccount.register($scope.register).then(function(data) {
                 $scope.loading = false;

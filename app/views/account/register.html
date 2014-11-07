@@ -22,8 +22,9 @@
             ng-focus="focusVerifyCode();"
             ng-blur="blurVerifyCode();"
             placeholder="短信验证码">
-            <div class="btn auth-code-btn">
-                <p ng-if="!register.uiCountdown" ng-click="verifyPhone();">获取验证码</p>
+            <div class="btn auth-code-btn" ng-click="verifyPhone();"
+            ng-class="{disabled: register.uiCountdown}">
+                <p ng-if="!register.uiCountdown">获取验证码</p>
                 <p ng-if="register.uiCountdown">{{register.uiCountdown}} 秒</p>
             </div>
         </div>
@@ -58,13 +59,14 @@
         }">
             <p>{{register.uiInviteCodeTip || register.uiInviteCodeError || register.uiServerError}}</p>
         </div>
-        <div class="btn register-btn" ng-click="registerAccount();">立即注册</div>
+        <div class="btn register-btn" ng-click="registerAccount();"
+        ng-class="{disabled: !register.uiSelected}">立即注册</div>
         <div class="ask">
-            <input type="checkbox" checked="checked">
+            <input type="checkbox" ng-model="register.uiSelected">
             <p>同意并遵守
-                <a href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/secret.pdf">隐私声明</a>
-                和
-                <a href="">服务条款</a></p>
+                <a target="_blank" href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/secret.pdf">隐私声明</a>
+                <!-- 和<a href="">服务条款</a> -->
+            </p>
         </div>
     </div>
     <div ng-if="register.uiSuccess" class="success">

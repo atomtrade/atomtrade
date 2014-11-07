@@ -1,25 +1,29 @@
 <div wd-header></div>
-<div class="wd-my-index wd-body">
-    <div class="item">
-        <p>
-            <span class="title">账号</span>
-            <span>{{userInfo.phone}}</span>
-            <span class="logout-btn" ng-click="logout()">退出账号</span>
-        </p>
+<div class="wd-my-index">
+    <div class="wd-body" ng-if="!loading">
+        <div class="item">
+            <p>
+                <span class="title">账号</span>
+                <span>{{userInfo.phone}}</span>
+            </p>
+        </div>
+        <div class="item">
+            <p>
+                <span>HKD 港币：</span>
+                <span class="strong">HK${{userInfo.hkCash}}</span>
+            </p>
+        </div>
+        <div class="item">
+            <p>
+                <span>USD 美元：</span>
+                <span class="strong">${{userInfo.usCash}}</span>
+            </p>
+        </div>
+        <a ng-if="step < 3" href="#/account-open" class="btn">继续开户</a>
+        <a class="btn" ng-click="logout()">退出账号</a>
     </div>
-    <div class="item">
-        <p>
-            <span>HKD 港币：</span>
-            <span class="strong">HK${{userInfo.hkCash}}</span>
-        </p>
+    <div class="wd-body" ng-if="loading">
+        <div wd-loading></div>
     </div>
-    <div class="item">
-        <p>
-            <span>USD 美元：</span>
-            <span class="strong">${{userInfo.usCash}}</span>
-        </p>
-    </div>
-    <div ng-if="loading" wd-loading></div>
-    <a href="#/account-open" class="btn">修改开户信息</a>
 </div>
 <div wd-footer></div>
