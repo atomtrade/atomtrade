@@ -13,6 +13,7 @@ function ($scope, wdAccount, $location) {
     $scope.loading = true;
     $scope.userInfo = {
         phone: '',
+        offer_id: '',
         usCash: 0,
         hkCash: 0
     };
@@ -26,6 +27,7 @@ function ($scope, wdAccount, $location) {
         if (data && data.is_succ) {
             $scope.userInfo = {
                 phone: data.phone,
+                offer_id: data.offer_id,
                 usCash: data.usstock_cash,
                 hkCash: data.hkstock_cash
             };
