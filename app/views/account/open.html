@@ -1,12 +1,3 @@
-<!-- 
-/**
- * @author wangxiao
- * 
- * 每位工程师都有保持代码优雅的义务
- * Each engineer has a duty to keep the code elegant
- */
- -->
-
 <div wd-header></div>
 <div class="wd-account-open wd-body">
     <div class="nav" ng-if="!loading">
@@ -15,19 +6,35 @@
         </div>
         <div class="nav-body">
             <div class="item">
-                <a ng-click="backToStep1();">填写表格</a>
+                <p>
+                    <span class="icon" ng-class="{'icon-progress1': step < 1, 'icon-progress2': step === 1, 'icon-progress3': step > 1}"></span>
+                    <a ng-if="step === 2" ng-click="backToStep1();">填写表格</a>
+                    <span ng-if="step !== 2">填写表格</span>
+                </p>
             </div>
             <div class="item">
-                <p>风险评估</p>
+                <p>
+                    <span class="icon" ng-class="{'icon-progress1': step < 2, 'icon-progress2': step === 2, 'icon-progress3': step > 2}"></span>
+                    <span>风险评估</span>
+                </p>
             </div>
             <div class="item">
-                <p>完成见证</p>
+                <p>
+                    <span class="icon" ng-class="{'icon-progress1': step < 3, 'icon-progress2': step === 3, 'icon-progress3': step > 3}"></span>
+                    <span>完成见证</span>
+                </p>
             </div>
             <div class="item">
-                <p>提交资料</p>
+                <p>
+                    <span class="icon icon-progress1"></span>
+                    <span>提交资料</span>
+                </p>
             </div>
             <div class="item">
-                <p>开户成功</p>
+                <p>
+                    <span class="icon icon-progress1"></span>
+                    <span>开户成功</span>
+                </p>
             </div>
         </div>
     </div>
@@ -37,7 +44,8 @@
             <p class="form-title">交易范围</p>
             <div class="item">
                 <p class="item-title">品种</p>
-                <input type="checkbox" ng-model="userInfo.stock">证券
+                <input type="checkbox" ng-model="userInfo.usstock">美股
+                <input type="checkbox" ng-model="userInfo.hkstock">港股
                 <input type="checkbox" ng-model="userInfo.future">期货
             </div>
             <p class="form-title">基本资料</p>

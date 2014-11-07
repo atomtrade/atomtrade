@@ -33,6 +33,20 @@
                 a, p {
                     font-size: 16px;
                 }
+                .icon {
+                    margin-bottom: -8px;
+                    margin-right: 12px;
+                    &.icon-progress1 {
+                        @include wd-image('icon-progress1.png');
+                    }
+                    &.icon-progress2 {
+                        @include wd-image('icon-progress2.png');
+                    }
+                    &.icon-progress3 {
+                        @include wd-image('icon-progress3.png');
+                    }
+                }
+
             }
         }
     }

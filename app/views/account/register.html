@@ -1,12 +1,3 @@
-<!-- 
-/**
- * @author wangxiao
- * 
- * 每位工程师都有保持代码优雅的义务
- * Each engineer has a duty to keep the code elegant
- */
- -->
-
 <div wd-header></div>
 <div class="wd-account-register wd-body">
     <div class="h2-title" ng-class="{hide: loading}">
@@ -31,8 +22,8 @@
             <input class="auth-code-input" type="text" 
             ng-model="register.verify_code" 
             ng-focus="focusVerifyCode();"
-            ng-blur="blurVerifyCode();">
-            <div class="btn auth-code-btn">
+            ng-blur="blurVerifyCode()">
+            <div class="btn auth-code-btn" ng-class="{disabled: register.uiCountdown}">
                 <p ng-if="!register.uiCountdown" ng-click="verifyPhone();">获取验证码</p>
                 <p ng-if="register.uiCountdown">{{register.uiCountdown}} 秒</p>
             </div>
@@ -46,7 +37,7 @@
         </div>
         <div class="item">
             <p class="title">设置登录密码</p>
-            <input type="text" ng-model="register.password" 
+            <input type="password" ng-model="register.password" 
             ng-focus="focusPassword();"
             ng-blur="blurPassword();">
             <div class="form-item-tips" 
@@ -55,6 +46,19 @@
                 error: register.uiPasswordError
             }">
                 <p>{{register.uiPasswordTip || register.uiPasswordError}}</p>
+            </div>
+        </div>
+        <div class="item">
+            <p class="title">再次确认密码</p>
+            <input type="password" ng-model="register.password2" 
+            ng-focus="focusPassword2();"
+            ng-blur="blurPassword2();">
+            <div class="form-item-tips" 
+            ng-class="{
+                hide: !register.uiPassword2Tip && !register.uiPassword2Error,
+                error: register.uiPassword2Error
+            }">
+                <p>{{register.uiPassword2Tip || register.uiPassword2Error}}</p>
             </div>
         </div>
         <div class="item">
@@ -70,20 +74,24 @@
             }">
                 <p>{{register.uiInviteCodeTip || register.uiInviteCodeError}}</p>
             </div>
+        </div>
+        <div class="item">
+            <div class="btn register-btn" 
+            ng-click="registerAccount();"
+            ng-class="{disabled: !register.uiSelected}">立即注册</div>
             <p class="error">{{register.uiServerError}}</p>
         </div>
-        <div class="btn register-btn" ng-click="registerAccount();">立即注册</div>
         <div class="ask">
-            <input type="checkbox" checked="checked">
+            <input type="checkbox" ng-model="register.uiSelected">
             <p>同意并遵守
-                <a href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/secret.pdf">隐私声明</a>
-                和
-                <a href="">服务条款</a></p>
+                <a target="_blank" href="http://register.guoking.com.hk:8080/WebBusiness/gk_open/pdf/secret.pdf">隐私声明</a>
+                <!-- 和<a href="">服务条款</a> -->
+            </p>
         </div>
     </div>
     <div ng-if="register.uiSuccess" class="success">
         <div class="icon-right"></div>
-        <p class="title">注册成功，你现在开通股票账户即可获得<span class="strong">三个月免费交易</span>。</p>
+        <p class="title">注册成功，你现在开通股票账户即可获得<span class="strong">三个月免费交易</span></p>
         <a href="#/account-open" class="btn">立即开户</a>
     </div>
     <div ng-if="loading" wd-loading></div>

@@ -50,7 +50,7 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, wdCheck) {
                     $location.path('/my-index');
                 } else {
                     $scope.loading = false;
-                    $scope.user.uiServerError = data.err_msg;
+                    $scope.user.uiServerError = data.error_msg;
                 }
             });
         }
@@ -60,5 +60,14 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, wdCheck) {
         if (e.keyCode === 13) {
             $scope.login();
         }
+    };
+
+    $scope.goToRegister = function() {
+        if ($scope.user.phone) {
+            wdStorage.item('phone', $scope.user.phone);
+        } else {
+            wdStorage.remove('phone');
+        }
+        $location.path('/account-register');
     };
 }]);

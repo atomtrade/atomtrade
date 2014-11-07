@@ -1,12 +1,3 @@
-<!-- 
-/**
- * @author wangxiao
- * 
- * 每位工程师都有保持代码优雅的义务
- * Each engineer has a duty to keep the code elegant
- */
- -->
-
 <div wd-header></div>
 <div class="wd-my-money wd-body">
     <div ng-if="!loading" wd-my-nav></div>
@@ -61,7 +52,7 @@
             <!-- 美元 end -->
         </div>
         <div class="item">
-            <p class="title">存入金额<span>（港币）</span></p>
+            <p class="title">存入金额<span ng-if="money.currency === 'hkd'">（港币）</span><span ng-if="money.currency === 'usd'">（美元）</span></p>
             <input type="text" ng-model="money.amount" ng-blur="checkAmount()">
             <p class="error">{{money.uiAmountError}}</p>
         </div>

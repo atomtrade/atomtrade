@@ -13,18 +13,23 @@ angular.module('atomApp')
 function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval, $window, wdCheck) {
     var verifyCodeTime = 60;
     $scope.loading = false;
+    var phone = wdStorage.item('phone');
     $scope.register = {
-        phone: '',
+        phone: phone || '',
         verify_code: '',
         password: '',
+        password2: '',
         invite_code: '',
         uiPhoneTip: '',
+        uiSelected: true,
         uiVerifyCodeTip: '',
         uiPasswordTip: '',
+        uiPassword2Tip: '',
         uiInviteCodeTip: '',
         uiPhoneError: '',
         uiVerifyCodeError: '',
         uiPasswordError: '',
+        uiPassword2Error: '',
         uiServerError: '',
         uiInviteCodeError: '',
         uiCountdown: 0,
@@ -40,8 +45,12 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         $scope.register.uiVerifyCodeError = '';
     };
     $scope.focusPassword = function() {
-        $scope.register.uiPasswordTip = '密码必须要大于 6 个字符，要包含数字和字母';
+        $scope.register.uiPasswordTip = '密码必须要 6 个或 6 个以上字符，要包含数字和字母';
         $scope.register.uiPasswordError = '';
+    };
+    $scope.focusPassword2 = function() {
+        $scope.register.uiPassword2Tip = '确认密码，保证两次输入一致';
+        $scope.register.uiPassword2Error = '';
     };
     $scope.focusInviteCode = function() {
         $scope.register.uiInviteCodeTip = '选填，输入邀请码或者邀请人的手机号';
@@ -54,11 +63,15 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
     };
     $scope.blurVerifyCode = function() {
         $scope.register.uiVerifyCodeTip = '';
-        $scope.checkVerifyCode();
+        // $scope.checkVerifyCode();
     };
     $scope.blurPassword = function() {
         $scope.register.uiPasswordTip = '';
         $scope.checkPassword();
+    };
+    $scope.blurPassword2 = function() {
+        $scope.register.uiPassword2Tip = '';
+        $scope.checkPassword2();
     };
     $scope.blurInviteCode = function() {
         $scope.register.uiInviteCodeTip = '';
@@ -97,6 +110,20 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
         }
     };
 
+    $scope.checkPassword2 = function() {
+        var res = wdCheck.checkPassword($scope.register.password2);
+        if ($scope.register.password !== $scope.register.password2) {
+            $scope.register.uiPassword2Error = '密码两次输入的不一致';
+            return false;
+        } else if (!res) {
+            $scope.register.uiPassword2Error = '';
+            return true;
+        } else {
+            $scope.register.uiPassword2Error = res;
+            return false;
+        }
+    };
+
     $scope.startCountdown = function() {
         $scope.register.uiCountdown = verifyCodeTime;
         var t = $interval(function() {
@@ -110,12 +137,21 @@ function ($scope, wdAccount, $timeout, wdConfig, wdStorage, $location, $interval
     $scope.verifyPhone = function() {
         if ($scope.checkPhone()) {
             $scope.startCountdown();
-            wdAccount.verifyPhone($scope.register.phone);
+            wdAccount.verifyPhone($scope.register.phone).then(function(data) {
+                if (!data.is_succ) {
+                    $scope.uiCountdown = 0;
+                    $scope.register.uiServerError = data.error_msg;
+                }
+            });
         }
     };
 
     $scope.registerAccount = function() {
-        if ($scope.checkPhone() && $scope.checkVerifyCode() && $scope.checkPassword()) {
+        if ($scope.checkPhone() && 
+            $scope.checkVerifyCode() && 
+            $scope.checkPassword() && 
+            $scope.checkPassword2() &&
+            $scope.register.uiSelected) {
             $scope.loading = true;
             wdAccount.register($scope.register).then(function(data) {
                 $scope.loading = false;

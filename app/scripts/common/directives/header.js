@@ -8,8 +8,8 @@
 'use strict';
 
 angular.module('atomApp')
-.directive('wdHeader', ['$location', '$window', 'wdAccount',
-function($location, $window, wdAccount) {
+.directive('wdHeader', ['$location', '$window', 'wdAccount', '$interval', 'wdStorage',
+function($location, $window, wdAccount, $interval, wdStorage) {
 return {
     restrict: 'A',
     templateUrl: 'views/common/header.html',
@@ -18,6 +18,7 @@ return {
     link: function($scope, element, attributes) {
         var btns = element.find('.nav-btns').find('.btn').removeClass('active');
         var path = $location.path();
+        $scope.step = wdStorage.item('is_set_info');
         switch (path) {
             case '/index':
                 btns.eq(0).addClass('active');
@@ -41,15 +42,36 @@ return {
                 $scope.isLogin = true;
             }
         });
+
         $scope.logout = function() {
             $scope.loading = true;
             wdAccount.logout().then(function(data) {
                 $scope.loading = false;
-                if (data.is_succ) {
-                    $location.path('/index');
-                }
+                $location.path('/index');
+                $scope.isLogin = false;
             });
         };
+
+        // 循环检测登录状态（出于安全考虑，如果多个 tab 打开，那一个退出，应该全部被退出）
+        var timer = $interval(function() {
+            switch (path) {
+                case '/account-open':
+                case '/my-index':
+                case '/my-money-in':
+                case '/my-money-out':
+                    wdAccount.check().then(function(data) {
+                        if (!data.is_succ) {
+                            $location.path('/account-login');
+                        }
+                    });
+                break;
+            }
+        }, 5000);
+        
+        $scope.$on('$destroy', function() {
+            $interval.cancel(timer);
+        });
+
     }
 };
 }]);

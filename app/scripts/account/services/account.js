@@ -11,14 +11,13 @@ angular.module('atomApp')
 .factory('wdAccount', 
 ['$rootScope', '$http', 'wdStorage', '$q',
 function($rootScope, $http, wdStorage, $q) {
-    var isLogin = false;
     // 是否检查过登录状态
     var isCheckLoginFlag = false;
     return {
         check: function() {
             var d = $q.defer();
             if (isCheckLoginFlag) {
-                if (isLogin) {
+                if (wdStorage.item('isLogin')) {
                     d.resolve({
                         is_succ: true
                     });
@@ -31,9 +30,14 @@ function($rootScope, $http, wdStorage, $q) {
                 isCheckLoginFlag = true;
                 $http.get('/check').then(function(data) {
                     if (data.is_succ) {
-                        isLogin = true;
+                        wdStorage.item('isLogin', true);
                         d.resolve({
                             is_succ: true
+                        });
+                    } else {
+                        wdStorage.removeAll();
+                        d.resolve({
+                            is_succ: false
                         });
                     }
                 });
@@ -48,31 +52,54 @@ function($rootScope, $http, wdStorage, $q) {
             });
         },
         register: function(opts) {
-            return $http.post('/register', opts);
+            var p = $http.post('/register', opts);
+            p.then(function(data) {
+                if (data.is_succ) {
+                    wdStorage.item('isLogin', true);
+                }
+            });
+            return p;
         },
         login: function(opts) {
             wdStorage.removeAll();
             var p = $http.post('/login', opts);
             p.then(function(data) {
                 if (data.is_succ) {
-                    isLogin = true;
+                    wdStorage.item('isLogin', true);
+                    if (data.is_set_info) {
+                        wdStorage.item('is_set_info', true);
+                    }
+                    if (data.is_set_risk) {
+                        wdStorage.item('is_set_risk', true);
+                    }
                 }
             });
             return p;
         },
         logout: function() {
             wdStorage.removeAll();
-            isLogin = false;
             return $http.get('/logout');
         },
         setInfo: function(opts) {
-            return $http.post('/set_info', opts);
+            var p = $http.post('/set_info', opts);
+            p.then(function(data) {
+                if (data.is_succ) {
+                    wdStorage.item('is_set_info', true);
+                }
+            });
+            return p;
         },
         getInfo: function() {
             return $http.get('/get_info');
         },
         setRisk: function(opts) {
-            return $http.post('/risk', opts);
+            var p = $http.post('/risk', opts);
+            p.then(function(data) {
+                if (data.is_succ) {
+                    wdStorage.item('is_set_risk', true);
+                }
+            });
+            return p;
         },
         changePassword: function(opts) {
             return $http.post('/change_password', opts);
