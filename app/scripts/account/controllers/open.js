@@ -420,6 +420,7 @@ function ($scope, wdAccount, $timeout, $location, wdStorage, $window, wdCheck, $
                     // checkHomeAddress() && 
                     checkEmail() && 
                     checkQQ() && 
+                    checkCompany() &&
                     // checkPostAddress() && 
                     // checkWorkAddress() && 
                     checkBusiness()) {
