@@ -17,12 +17,12 @@ function ($scope, wdAccount, $location) {
         hkCash: 0
     };
     wdAccount.check().then(function(data) {
-        if (data.is_succ) {
-            return wdAccount.getInfo();
-        } else {
+        if (!data.is_succ) {
             $location.path('/account-login');
         }
-    }).then(function(data) {
+    });
+    
+    wdAccount.getInfo().then(function(data) {
         if (data && data.is_succ) {
             $scope.userInfo = {
                 phone: data.phone,
